@@ -1,0 +1,1534 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>NAIL BEAUTY - Inicio</title>
+<style>
+:root{--bg:#faf9fd;--lav-1:#f7f2fc;--lav-2:#d4baf7;--lav-3:#a678e0;--lav-4:#6c3bbd;--card-bg:#fff;--text:#221c2b;--muted:#6f6a7d;}
+*{box-sizing:border-box}
+body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;color:var(--text);background:var(--bg);}
+header{position:relative;height:100vh;display:flex;align-items:center;justify-content:center;color:white;overflow:hidden;}
+.header-bg{position:absolute;top:0;left:0;width:100%;height:100%;background-image:url('WhatsApp Image 2025-10-06 at 2.55.09 PM.jpeg');background-size:cover;background-position:center;filter:blur(8px) brightness(0.7);transform:scale(1.1);}
+.header-overlay{position:relative;z-index:2;text-align:center;padding:20px;background:rgba(166,120,224,0.3);backdrop-filter:blur(10px);border-radius:20px;margin:20px;max-width:800px;}
+.header-overlay h1{margin:0;font-size:3.5rem;letter-spacing:2px;text-shadow:2px 2px 4px rgba(0,0,0,0.5);}
+.header-overlay p{font-size:1.3rem;opacity:.95;margin-top:15px;text-shadow:1px 1px 2px rgba(0,0,0,0.5);}
+.scroll-indicator{position:absolute;bottom:30px;left:50%;transform:translateX(-50%);color:white;font-size:2rem;animation:bounce 2s infinite;}
+@keyframes bounce{0%,20%,50%,80%,100%{transform:translateY(0) translateX(-50%);}40%{transform:translateY(-10px) translateX(-50%);}60%{transform:translateY(-5px) translateX(-50%);}}
+.container{max-width:1100px;margin:0 auto 40px;padding:0 16px}
+.card{background:var(--card-bg);padding:18px;border-radius:12px;box-shadow:0 10px 30px rgba(11,7,20,0.06);}
+.main-nav{display:flex;justify-content:space-between;gap:8px;background:#fff;padding:10px;border-radius:12px;margin-bottom:18px;align-items:center;position:sticky;top:10px;z-index:50;}
+.main-nav .left{display:flex;gap:8px;flex-wrap:wrap;}
+.main-nav button{background:transparent;border:none;padding:10px 14px;border-radius:8px;font-weight:600;color:var(--text);cursor:pointer;position:relative}
+.main-nav button.active{color:var(--lav-4)}
+.main-nav button.active::after{content:'';position:absolute;left:12px;right:12px;bottom:-10px;height:3px;background:linear-gradient(90deg,var(--lav-3),var(--lav-4));border-radius:4px;}
+.grid{display:grid;grid-template-columns:1fr 380px;gap:20px}
+@media(max-width:900px){.grid{grid-template-columns:1fr}}
+h2{color:var(--lav-3);margin-top:0}
+.small-muted{color:var(--muted)}
+
+/* Home Section */
+.welcome-section{text-align:center;padding:40px 0}
+.welcome-section h2{font-size:2rem;margin-bottom:20px}
+.welcome-section p{font-size:1.1rem;max-width:600px;margin:0 auto 30px;line-height:1.6}
+.features-grid{display:grid;grid-template-columns:repeat(auto-fit, minmax(250px, 1fr));gap:20px;margin-top:40px}
+.feature-card{background:var(--card-bg);padding:25px;border-radius:12px;text-align:center;box-shadow:0 5px 15px rgba(0,0,0,0.08);transition:transform 0.3s}
+.feature-card:hover{transform:translateY(-5px)}
+.feature-icon{font-size:2.5rem;margin-bottom:15px}
+.feature-card h3{color:var(--lav-4);margin-bottom:10px}
+
+/* Services */
+.service-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+@media(max-width:700px){.service-grid{grid-template-columns:1fr}}
+.service-btn{padding:12px;border-radius:10px;border:none;background:var(--lav-3);color:#fff;font-weight:700;cursor:pointer}
+.service-btn:hover{background:var(--lav-4)}
+.service-modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);align-items:center;justify-content:center;z-index:60}
+.service-modal .modal-content{background:#fff;padding:18px;border-radius:12px;max-width:560px;width:92%;position:relative}
+.service-modal .close{position:absolute;right:14px;top:10px;border:none;background:transparent;font-size:26px;color:var(--lav-4);cursor:pointer}
+.service-img{width:100%;border-radius:10px;margin-top:10px;max-height:300px;object-fit:cover;}
+
+/* Galería de Servicios */
+.service-gallery {
+  margin: 15px 0;
+}
+
+.service-gallery-main {
+  margin-bottom: 10px;
+}
+
+.service-gallery-thumbs {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.service-thumb {
+  width: 60px;
+  height: 60px;
+  border-radius: 6px;
+  cursor: pointer;
+  object-fit: cover;
+  border: 2px solid transparent;
+  transition: all 0.3s;
+}
+
+.service-thumb:hover {
+  transform: scale(1.1);
+}
+
+.service-thumb.active {
+  border-color: var(--lav-4);
+}
+
+/* Gallery */
+.gal-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;margin-top:12px}
+@media(max-width:700px){.gal-grid{grid-template-columns:1fr}}
+.gal-card{border-radius:12px;overflow:hidden;box-shadow:0 8px 30px rgba(11,7,20,0.07);background:#fff}
+.gal-card img{width:100%;height:100%;object-fit:cover;display:block;cursor:pointer}
+.gallery-modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:80;align-items:center;justify-content:center}
+.gallery-inner{position:relative;max-width:900px;width:94%;display:flex;align-items:center;justify-content:center}
+.gallery-inner img{max-width:100%;max-height:80vh;border-radius:10px}
+.gclose{position:absolute;right:-10px;top:-40px;background:transparent;border:none;color:#fff;font-size:34px;cursor:pointer}
+.gprev,.gnext{position:absolute;top:50%;transform:translateY(-50%);background:rgba(255,255,255,0.08);border:none;color:#fff;font-size:28px;padding:12px;border-radius:8px;cursor:pointer}
+.gprev{left:8px}.gnext{right:8px}
+
+/* Forms */
+form{display:flex;flex-direction:column;gap:10px}
+input[type="text"],input[type="email"],input[type="date"],input[type="time"],input[type="password"],select,textarea{padding:12px;border-radius:8px;border:1px solid #ece7f8;font-size:15px;width:100%}
+.form-centro{max-width:640px;margin:0 auto}
+label.small{font-size:13px;color:var(--muted);display:block;margin-bottom:5px}
+.required::after{content:" *";color:#e74c3c}
+.form-group{margin-bottom:15px}
+.upload-area{border:2px dashed var(--lav-2);border-radius:8px;padding:20px;text-align:center;cursor:pointer;transition:all 0.3s}
+.upload-area:hover{background-color:var(--lav-1)}
+.upload-area p{margin:0;color:var(--muted)}
+.upload-preview{display:grid;grid-template-columns:repeat(auto-fill, minmax(100px, 1fr));gap:10px;margin-top:15px}
+.upload-preview .preview-item{position:relative;border-radius:8px;overflow:hidden}
+.upload-preview .preview-item img{width:100%;height:100px;object-fit:cover}
+.upload-preview .preview-item .remove{position:absolute;top:5px;right:5px;background:rgba(0,0,0,0.7);color:white;border:none;border-radius:50%;width:20px;height:20px;font-size:12px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+
+/* Admin */
+.admin-panel{display:none}
+.admin-login{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:100;align-items:center;justify-content:center}
+.admin-login .modal-content{background:#fff;padding:30px;border-radius:12px;max-width:400px;width:90%}
+.panel-block{background:#fff;padding:12px;border-radius:10px;margin-top:12px}
+table{width:100%;border-collapse:collapse}
+th,td{padding:10px;border-bottom:1px solid #f5f3f8;text-align:left}
+th{background:linear-gradient(90deg,var(--lav-3),var(--lav-4));color:#fff}
+.small-btn{padding:6px 8px;border-radius:8px;border:none;cursor:pointer}
+
+/* Utilities */
+.btn{background:var(--lav-3);color:#fff;border:none;padding:10px 12px;border-radius:8px;cursor:pointer;transition:background 0.3s}
+.btn:hover{background:var(--lav-4)}
+.btn.ghost{background:transparent;border:1px solid var(--lav-2);color:var(--lav-4)}
+.btn-danger{background:#e74c3c;color:white}
+.btn-success{background:#2ecc71;color:white}
+.center{text-align:center}
+.error-message{color:#e74c3c;font-size:12px;margin-top:5px}
+.success-message{color:#2ecc71;font-size:14px;margin-top:10px;text-align:center}
+.status-badge{padding:4px 8px;border-radius:12px;font-size:0.75rem;font-weight:600;display:inline-block}
+.status-pending{background:#fff3cd;color:#856404}
+.status-confirmed{background:#d1ecf1;color:#0c5460}
+.status-completed{background:#d4edda;color:#155724}
+.status-cancelled{background:#f8d7da;color:#721c24}
+.admin-access{position:absolute;right:20px;top:20px;z-index:60;}
+
+/* Map */
+.map-container{width:100%;height:300px;border-radius:8px;overflow:hidden;margin-top:15px}
+.map-container iframe{width:100%;height:100%;border:none}
+
+/* Social Media */
+.social-links{display:flex;justify-content:center;gap:15px;margin-top:15px}
+.social-link{display:flex;align-items:center;gap:8px;padding:10px 15px;background:var(--lav-1);border-radius:8px;text-decoration:none;color:var(--text);transition:all 0.3s}
+.social-link:hover{background:var(--lav-2);transform:translateY(-2px)}
+
+/* Seasonal Section Styles */
+.seasonal-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.seasonal-card {
+  background: var(--card-bg);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+  transition: transform 0.3s;
+  display: flex;
+  flex-direction: column;
+}
+
+.seasonal-card:hover {
+  transform: translateY(-5px);
+}
+
+.seasonal-image {
+  height: 180px;
+  overflow: hidden;
+  background: var(--lav-1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.seasonal-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.seasonal-card h3 {
+  color: var(--lav-4);
+  margin: 15px 15px 5px;
+}
+
+.seasonal-card p {
+  margin: 5px 15px;
+  font-size: 0.9rem;
+  color: var(--muted);
+  flex-grow: 1;
+}
+
+.seasonal-card .price {
+  color: var(--lav-3);
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+.seasonal-card .btn {
+  margin: 15px;
+}
+
+.seasonal-info {
+  margin-top: 30px;
+}
+
+@media (max-width: 700px) {
+  .seasonal-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Halloween Admin Styles */
+.halloween-designs-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 15px;
+  margin-top: 15px;
+}
+
+.halloween-design-item {
+  border: 1px solid var(--lav-2);
+  border-radius: 8px;
+  overflow: hidden;
+  position: relative;
+}
+
+.halloween-design-item img {
+  width: 100%;
+  height: 120px;
+  object-fit: cover;
+}
+
+.halloween-design-info {
+  padding: 10px;
+}
+
+.halloween-design-info h4 {
+  margin: 0 0 5px;
+  font-size: 0.9rem;
+}
+
+.halloween-design-info p {
+  margin: 0;
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+
+.halloween-design-actions {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  background: var(--lav-1);
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="header-bg"></div>
+  <div class="header-overlay">
+    <h1>NAIL BEAUTY</h1>
+    <p>Tu belleza en nuestras manos</p>
+    <p>Descubre el arte de la manicura y pedicura profesional</p>
+  </div>
+  <div class="scroll-indicator">⌄</div>
+  <button class="btn admin-access" onclick="openAdminLogin()">Acceso Admin</button>
+</header>
+<div class="container">
+  <div class="main-nav">
+    <div class="left">
+      <button class="active" onclick="showSection('home')">Inicio</button>
+      <button onclick="showSection('services')">Servicios</button>
+      <button onclick="showSection('seasonal')">Uñas de Temporada</button>
+      <button onclick="showSection('gallery')">Galería</button>
+      <button onclick="showSection('booking')">Reservas</button>
+      <button onclick="showSection('check-appointment')">Mi Cita</button>
+      <button id="adminTab" onclick="showSection('admin')" style="display:none">Admin</button>
+      <button onclick="showSection('info')">Información</button>
+    </div>
+  </div>
+  
+  <div class="grid">
+    <div>
+      <!-- Home Section -->
+      <div id="home" class="card">
+        <div class="welcome-section">
+          <h2>Bienvenida a Nail Beauty</h2>
+          <p>En Nail Beauty nos especializamos en realzar tu belleza natural con servicios de manicura y pedicura de alta calidad. Nuestro equipo de profesionales está dedicado a brindarte una experiencia única y relajante.</p>
+          
+          <div class="features-grid">
+            <div class="feature-card">
+              <div class="feature-icon">💅</div>
+              <h3>Servicios Profesionales</h3>
+              <p>Uñas acrilicas, Semipermanente, Baño en acrilico, base ruber y press on</p>
+            </div>
+            <div class="feature-card">
+              <div class="feature-icon">⭐</div>
+              <h3>Calidad Garantizada</h3>
+              <p>Utilizamos productos de primera calidad y técnicas profesionales para resultados duraderos</p>
+            </div>
+            <div class="feature-card">
+              <div class="feature-icon">👩‍💼</div>
+              <h3>Expertas en Belleza</h3>
+              <p>Nuestro equipo está capacitado para asesorarte y crear el diseño perfecto para ti</p>
+            </div>
+            <div class="feature-card">
+              <div class="feature-icon">💖</div>
+              <h3>Experiencia Personalizada</h3>
+              <p>Cada servicio se adapta a tus preferencias y necesidades individuales</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Services Section -->
+      <div id="services" class="card" style="display:none">
+        <h2>Nuestros Servicios</h2>
+        <div class="service-grid">
+          <button class="service-btn" onclick="openServiceModal(
+            'Uñas acrílicas', 
+            'Extensiones artificiales creadas a partir de una mezcla de polímero en polvo y monómero líquido que se adhieren a la uña natural para darles mayor longitud, grosor y resistencia.', 
+            100000, 
+            ['acrilicas 1.jpeg', 'acrilicas 2.jpeg', 'acrilicas 3.jpeg', 'acrilicas 4.jpeg', 'acrilicas 5.jpeg', 'acrilicas 6.jpeg' ]
+          )">Uñas acrílicas</button>
+          
+          <button class="service-btn" onclick="openServiceModal(
+            'Press on', 
+            'Uñas postizas de alta calidad que se adhieren temporalmente a tus uñas naturales, perfectas para ocasiones especiales o cambio rápido de look.', 
+            50000, 
+            ['Press on 1.jpeg', 'Press on 2.jpeg', 'Press on 3.jpeg', 'Press on 4.jpeg', 'Press on 5.jpeg', 'Press on 6.jpeg']
+          )">Press on</button>
+          
+          <button class="service-btn" onclick="openServiceModal(
+            'Baño en acrílico', 
+            'Técnica que fortalece las uñas naturales aplicando una capa delgada de acrílico para darles mayor resistencia y durabilidad.', 
+            80000, 
+            ['Baño en acrilico 1.jpeg', 'Baño en acrilico 2.jpeg', 'Baño en acrilico 3.jpeg', 'Baño en acrilico 4.jpeg', 'Baño en acrilico 5.jpeg']
+          )">Baño en acrílico</button>
+          
+          <button class="service-btn" onclick="openServiceModal(
+            'Base Rubber', 
+            'Esmalte de gel que dura hasta 3 semanas con acabado brillante y resistencia superior.', 
+            45000, 
+            ['Base Rubber 1.jpeg', 'Imagen 14.jpeg', 'Imagen 15.jpeg']
+          )">Base Rubber</button>
+          
+          <button class="service-btn" onclick="openServiceModal(
+            'Semipermanente', 
+            'Técnica especializada para cutículas perfectas sin dolor ni cortes.', 
+            35000, 
+            ['Semipermanente 1.jpeg', 'Semipermanente 2.jpeg', 'Semipermanente 3.jpeg', 'Semipermanente 4.jpeg', 'Semipermanente 5.jpeg', 'Semipermanente 6.jpeg']
+          )">Semipermanente</button>
+          
+        </div>
+      </div>
+      
+      <!-- Seasonal Section -->
+      <div id="seasonal" class="card" style="display:none">
+        <h2>Uñas de Temporada - Halloween</h2>
+        <p>Disfruta de nuestros diseños especiales de Halloween. ¡Es temporada limitada!</p>
+        
+        <div class="seasonal-grid" id="seasonalDesignsGrid">
+          <!-- Los diseños de Halloween se cargarán aquí dinámicamente -->
+        </div>
+        
+        <div class="seasonal-info">
+          <h3>Información Importante</h3>
+          <div class="panel-block">
+            <p><strong>Disponibilidad:</strong> Solo durante el mes de octubre</p>
+            <p><strong>Duración:</strong> Aproximadamente 1.5-2 horas</p>
+            <p><strong>Incluye:</strong> Diseño especial + decoración temática + sellado profesional</p>
+            <p><strong>Nota:</strong> Los diseños pueden personalizarse según tus preferencias</p>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Gallery Section -->
+      <div id="gallery" class="card" style="display:none">
+        <h2>Galería de Trabajos</h2>
+        <p>Explora algunos de nuestros trabajos más recientes y encuentra inspiración para tu próximo diseño.</p>
+        <div class="gal-grid">
+          <div class="gal-card"><img src="Acrilicas 1.jpeg" alt="Trabajo de uñas 1" onclick="openGallery(0)"></div>
+          <div class="gal-card"><img src="Acrilicas 2.jpeg" alt="Trabajo de uñas 2" onclick="openGallery(1)"></div>
+          <div class="gal-card"><img src="Acrilicas 3.jpeg" alt="Trabajo de uñas 3" onclick="openGallery(2)"></div>
+          <div class="gal-card"><img src="Acrilicas 4.jpeg" alt="Trabajo de uñas 4" onclick="openGallery(3)"></div>
+          <div class="gal-card"><img src="Acrilicas 5.jpeg" alt="Trabajo de uñas 5" onclick="openGallery(4)"></div>
+          <div class="gal-card"><img src="Acrilicas 6.jpeg" alt="Trabajo de uñas 6" onclick="openGallery(5)"></div>
+          <div class="gal-card"><img src="Press on 1.jpeg" alt="Trabajo de uñas 7" onclick="openGallery(6)"></div> 
+          <div class="gal-card"><img src="Press on 2.jpeg" alt="Trabajo de uñas 8" onclick="openGallery(7)"></div>
+          <div class="gal-card"><img src="Press on 3.jpeg" alt="Trabajo de uñas 9" onclick="openGallery(8)"></div>
+          <div class="gal-card"><img src="Press on 4.jpeg" alt="Trabajo de uñas 10" onclick="openGallery(9)"></div>
+          <div class="gal-card"><img src="Press on 5.jpeg" alt="Trabajo de uñas 11" onclick="openGallery(10)"></div>
+          <div class="gal-card"><img src="Baño en acrilico 1.jpeg" alt="Trabajo de uñas 12" onclick="openGallery(11)"></div>
+          <div class="gal-card"><img src="Baño en acrilico 2.jpeg" alt="Trabajo de uñas 13" onclick="openGallery(12)"></div>
+          <div class="gal-card"><img src="Baño en acrilico 3.jpeg" alt="Trabajo de uñas 14" onclick="openGallery(13)"></div>
+          <div class="gal-card"><img src="Baño en acrilico 4.jpeg" alt="Trabajo de uñas 15" onclick="openGallery(14)"></div>
+          <div class="gal-card"><img src="Baño en acrilico 5.jpeg" alt="Trabajo de uñas 16" onclick="openGallery(15)"></div>
+          <div class="gal-card"><img src="Base Rubber 1.jpeg" alt="Trabajo de uñas 17" onclick="openGallery(15)"></div>
+        </div>
+      </div>
+      
+      <!-- Booking Section -->
+      <div id="booking" class="card" style="display:none">
+        <h2>Reserva tu Cita</h2>
+        <p>Programa tu cita con nosotros y disfruta de una experiencia de belleza excepcional.</p>
+        <div class="form-centro">
+          <form id="bookingForm" onsubmit="submitBooking(event)">
+            <div class="form-group">
+              <label for="name" class="small required">Nombre completo</label>
+              <input type="text" id="name" name="name" required>
+              <div class="error-message" id="nameError"></div>
+            </div>
+            
+            <div class="form-group">
+              <label for="email" class="small required">Correo electrónico</label>
+              <input type="email" id="email" name="email" required>
+              <div class="error-message" id="emailError"></div>
+            </div>
+            
+            <div class="form-group">
+              <label for="phone" class="small required">Teléfono</label>
+              <input type="text" id="phone" name="phone" required>
+              <div class="error-message" id="phoneError"></div>
+            </div>
+            
+            <div class="form-group">
+              <label for="service" class="small required">Servicio</label>
+              <select id="service" name="service" required>
+                <option value="">Selecciona un servicio</option>
+                <option value="Uñas acrílicas">Uñas acrílicas</option>
+                <option value="Press on">Press on</option>
+                <option value="Baño en acrílico">Baño en acrílico</option>
+                <option value="Base Rubber">Base Rubber</option>
+                <option value="Semipermanente">Semipermanente</option>
+                <!-- Las opciones de Halloween se agregarán dinámicamente -->
+              </select>
+              <div class="error-message" id="serviceError"></div>
+            </div>
+            
+            <div class="form-group">
+              <label for="date" class="small required">Fecha</label>
+              <input type="date" id="date" name="date" required>
+              <div class="error-message" id="dateError"></div>
+            </div>
+            
+            <div class="form-group">
+              <label for="time" class="small required">Hora</label>
+              <input type="time" id="time" name="time" required>
+              <div class="error-message" id="timeError"></div>
+            </div>
+            
+            <div class="form-group">
+              <label for="notes" class="small">Notas adicionales</label>
+              <textarea id="notes" name="notes" rows="3" placeholder="Especificaciones especiales, alergias, etc."></textarea>
+            </div>
+            
+            <button type="submit" class="btn">Reservar Cita</button>
+          </form>
+        </div>
+      </div>
+      
+      <!-- Check Appointment Section -->
+      <div id="check-appointment" class="card" style="display:none">
+        <h2>Consulta tu Cita</h2>
+        <p>Ingresa tu correo electrónico para consultar el estado de tu reserva.</p>
+        <div class="form-centro">
+          <form id="checkAppointmentForm" onsubmit="checkAppointment(event)">
+            <div class="form-group">
+              <label for="checkEmail" class="small required">Correo electrónico</label>
+              <input type="email" id="checkEmail" name="checkEmail" required>
+              <div class="error-message" id="checkEmailError"></div>
+            </div>
+            
+            <button type="submit" class="btn">Consultar Cita</button>
+          </form>
+          
+          <div id="appointmentResult" style="display:none; margin-top: 20px;">
+            <!-- Los resultados se mostrarán aquí -->
+          </div>
+        </div>
+      </div>
+      
+      <!-- Admin Section -->
+      <div id="admin" class="card admin-panel">
+        <h2>Panel de Administración</h2>
+        
+        <!-- Gestión de Citas -->
+        <div class="panel-block">
+          <h3>Citas Agendadas</h3>
+          <table id="appointmentsTable">
+            <thead>
+              <tr>
+                <th>Cliente</th>
+                <th>Email</th>
+                <th>Servicio</th>
+                <th>Fecha</th>
+                <th>Hora</th>
+                <th>Estado</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Las citas se cargarán dinámicamente -->
+            </tbody>
+          </table>
+        </div>
+        
+        <!-- Gestión de Inventario -->
+        <div class="panel-block">
+          <h3>Gestión de Inventario</h3>
+          <div class="form-group">
+            <button class="btn" onclick="showInventoryForm()">Agregar Producto</button>
+          </div>
+          
+          <table id="inventoryTable">
+            <thead>
+              <tr>
+                <th>Producto</th>
+                <th>Categoría</th>
+                <th>Cantidad</th>
+                <th>Precio</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Los productos se cargarán dinámicamente -->
+            </tbody>
+          </table>
+        </div>
+        
+        <!-- Formulario para agregar/editar productos -->
+        <div class="panel-block" id="inventoryForm" style="display:none">
+          <h3 id="inventoryFormTitle">Agregar Producto</h3>
+          <form id="productForm" onsubmit="saveProduct(event)">
+            <input type="hidden" id="productId">
+            
+            <div class="form-group">
+              <label for="productName" class="small required">Nombre del Producto</label>
+              <input type="text" id="productName" required>
+            </div>
+            
+            <div class="form-group">
+              <label for="productCategory" class="small required">Categoría</label>
+              <select id="productCategory" required>
+                <option value="">Selecciona una categoría</option>
+                <option value="Esmaltes">Esmaltes</option>
+                <option value="Acrílicos">Acrílicos</option>
+                <option value="Gel">Gel</option>
+                <option value="Herramientas">Herramientas</option>
+                <option value="Cuidado">Cuidado de Piel</option>
+                <option value="Temporada">Temporada</option>
+              </select>
+            </div>
+            
+            <div class="form-group">
+              <label for="productQuantity" class="small required">Cantidad</label>
+              <input type="number" id="productQuantity" min="0" required>
+            </div>
+            
+            <div class="form-group">
+              <label for="productPrice" class="small required">Precio ($)</label>
+              <input type="number" id="productPrice" min="0" step="0.01" required>
+            </div>
+            
+            <div class="form-group">
+              <label for="productDescription" class="small">Descripción</label>
+              <textarea id="productDescription" rows="3"></textarea>
+            </div>
+            
+            <button type="submit" class="btn">Guardar Producto</button>
+            <button type="button" class="btn ghost" onclick="hideInventoryForm()">Cancelar</button>
+          </form>
+        </div>
+        
+        <!-- Gestión de Halloween -->
+        <div class="panel-block">
+          <h3>Gestión de Uñas de Temporada - Halloween</h3>
+          
+          <!-- Formulario para agregar diseño -->
+          <div class="form-group">
+            <h4>Agregar Nuevo Diseño</h4>
+            <form id="halloweenForm" onsubmit="saveHalloweenDesign(event)">
+              <div class="form-group">
+                <label class="small required">Nombre del Diseño</label>
+                <input type="text" id="designName" required>
+              </div>
+              
+              <div class="form-group">
+                <label class="small required">Descripción</label>
+                <textarea id="designDescription" required rows="2"></textarea>
+              </div>
+              
+              <div class="form-group">
+                <label class="small required">Precio</label>
+                <input type="number" id="designPrice" required>
+              </div>
+              
+              <div class="form-group">
+                <label class="small required">Imagen del Diseño</label>
+                <div class="upload-area" onclick="document.getElementById('designImage').click()">
+                  <p>Haz clic para seleccionar imagen</p>
+                  <input type="file" id="designImage" accept="image/*" style="display:none" onchange="previewDesignImage(event)" required>
+                </div>
+                <div id="designImagePreview" style="margin-top: 10px;"></div>
+              </div>
+              
+              <button type="submit" class="btn">Guardar Diseño</button>
+            </form>
+          </div>
+          
+          <!-- Lista de diseños existentes -->
+          <div style="margin-top: 30px;">
+            <h4>Diseños Existentes</h4>
+            <div class="halloween-designs-grid" id="halloweenDesignsList">
+              <!-- Los diseños se cargarán aquí -->
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Information Section -->
+      <div id="info" class="card" style="display:none">
+        <h2>Información de Contacto</h2>
+        
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px;">
+          <div>
+            <h3>Horario de Atención</h3>
+            <div class="panel-block">
+              <p><strong>Lunes a Viernes:</strong> 9:00 - 19:00</p>
+              <p><strong>Sábados:</strong> 10:00 - 16:00</p>
+              <p><strong>Domingos:</strong> Cerrado</p>
+            </div>
+            
+            <h3 style="margin-top: 30px;">Nuestra Ubicación</h3>
+            <div class="panel-block">
+              <p><strong>Dirección:</strong> Calle Principal 123, Ciudad</p>
+              <p><strong>Barrio:</strong> La serafina</p>
+              <p>Facil acceso, cerca de Jumbo 20 de Julio</p>
+              
+              <!-- Mapa de Google Maps -->
+              <div class="map-container">
+                <iframe src="https://www.google.com/maps/embed?pb=!4v1759790364155!6m8!1m7!1s3aJFJaOGF8IknNl_FHZjww!2m2!1d4.568210667390043!2d-74.09913035898374!3f298.678432070357!4f3.0966110380087883!5f0.7820865974627469" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+              </div>
+            </div>
+          </div>
+          
+          <div>
+            <h3>Contacto</h3>
+            <div class="panel-block">
+              <p><strong>Teléfono:</strong> 350 396 6821</p> 
+              <p><strong>WhatsApp:</strong> 350 396 6821</p>
+            </div>
+            
+            <h3 style="margin-top: 30px;">Políticas</h3>
+            <div class="panel-block">
+              <p><strong>Cancelaciones:</strong> Con 24 horas de anticipación</p>
+              <p><strong>Pagos:</strong> Efectivo y transferencias</p>
+              <p><strong>Garantía:</strong> 7 días en servicios de uñas acrílicas y gel</p>
+            </div>
+          </div>
+        </div>
+        
+        <div style="margin-top: 30px; text-align: center;">
+          <h3>Síguenos en Redes Sociales</h3>
+          <div class="social-links">
+            <a href="https://www.instagram.com/nail_beauty2001/" target="_blank" class="social-link">
+              <span>📷</span> Instagram
+            </a>
+            <a href="https://www.tiktok.com/@nailbeauty" target="_blank" class="social-link">
+              <span>🎵</span> TikTok
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Sidebar -->
+    <div>
+      <div id="homeSidebar">
+        <div class="card">
+          <h2>¿Necesitas Ayuda?</h2>
+          <p class="small-muted">No dudes en contactarnos si tienes alguna pregunta sobre nuestros servicios o necesitas asistencia con tu reserva.</p>
+          <button class="btn" style="margin-top: 10px; width: 100%;" onclick="showSection('info')">Contactar</button>
+        </div>
+        
+        <div class="card">
+          <h2>Servicios Populares</h2>
+          <ul style="padding-left: 20px;">
+            <li>Uñas acrilicas</li>
+            <li>Semipermanente</li>
+            <li>Press on</li>
+            <li>Base ruber</li>
+            <li>Baño en acrilico</li>
+          </ul>
+        </div>
+      </div>
+      
+      <div id="otherSidebar" style="display:none">
+        <div class="card">
+          <h2>¿Necesitas Ayuda?</h2>
+          <p class="small-muted">No dudes en contactarnos si tienes alguna pregunta sobre nuestros servicios o necesitas asistencia con tu reserva.</p>
+          <button class="btn" style="margin-top: 10px; width: 100%;" onclick="showSection('info')">Contactar</button>
+        </div>
+        
+        <div class="card">
+          <h2>Servicios Populares</h2>
+          <ul style="padding-left: 20px;">
+            <li>Uñas acrilicas</li>
+            <li>Semipermanente</li>
+            <li>Press on</li>
+            <li>Base ruber</li>
+            <li>Baño en acrilico</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Service Modal -->
+<div class="service-modal" id="serviceModal">
+  <div class="modal-content">
+    <button class="close" onclick="closeServiceModal()">&times;</button>
+    <h2 id="modalServiceName"></h2>
+    
+    <!-- Galería de imágenes del servicio -->
+    <div class="service-gallery">
+      <div class="service-gallery-main">
+        <img id="modalServiceMainImage" src="" alt="" class="service-img">
+      </div>
+      <div class="service-gallery-thumbs" id="serviceGalleryThumbs">
+        <!-- Las miniaturas se generarán dinámicamente -->
+      </div>
+    </div>
+    
+    <p id="modalServiceDescription"></p>
+    <p><strong>Precio: $<span id="modalServicePrice"></span></strong></p>
+    <button class="btn" onclick="closeServiceModal()">Cerrar</button>
+    <button class="btn" style="margin-top: 10px;" onclick="bookThisService()">Reservar este Servicio</button>
+  </div>
+</div>
+
+<!-- Gallery Modal -->
+<div class="gallery-modal" id="galleryModal">
+  <div class="gallery-inner">
+    <button class="gclose" onclick="closeGallery()">&times;</button>
+    <button class="gprev" onclick="changeGalleryImage(-1)">&#10094;</button>
+    <img id="galleryImg" src="" alt="">
+    <button class="gnext" onclick="changeGalleryImage(1)">&#10095;</button>
+  </div>
+</div>
+
+<!-- Admin Login Modal -->
+<div class="admin-login" id="adminLogin">
+  <div class="modal-content">
+    <h2>Acceso de Administrador</h2>
+    <form id="loginForm" onsubmit="adminLogin(event)">
+      <div class="form-group">
+        <label for="adminUsername" class="small required">Usuario</label>
+        <input type="text" id="adminUsername" required>
+      </div>
+      
+      <div class="form-group">
+        <label for="adminPassword" class="small required">Contraseña</label>
+        <input type="password" id="adminPassword" required>
+      </div>
+      
+      <div class="error-message" id="loginError"></div>
+      
+      <button type="submit" class="btn">Iniciar Sesión</button>
+      <button type="button" class="btn ghost" onclick="closeAdminLogin()">Cancelar</button>
+    </form>
+  </div>
+</div>
+
+<script>
+// Función para cargar citas desde localStorage
+function loadAppointments() {
+  const storedAppointments = localStorage.getItem('nailBeautyAppointments');
+  if (storedAppointments) {
+    return JSON.parse(storedAppointments);
+  } else {
+    return [];
+  }
+}
+
+// Función para guardar citas en localStorage
+function saveAppointments(appointments) {
+  localStorage.setItem('nailBeautyAppointments', JSON.stringify(appointments));
+}
+
+// Inicializar citas
+let appointments = loadAppointments();
+
+let inventory = [
+  { id: 1, name: "Esmalte Rojo Clásico", category: "Esmaltes", quantity: 24, price: 8.50, description: "Esmalte de larga duración color rojo clásico" },
+  { id: 2, name: "Kit Acrílico Profesional", category: "Acrílicos", quantity: 8, price: 45.00, description: "Kit completo para uñas acrílicas" },
+  { id: 3, name: "Gel UV Brillante", category: "Gel", quantity: 15, price: 12.75, description: "Gel para uñas con acabado brillante" },
+  { id: 4, name: "Alicate de Cutículas", category: "Herramientas", quantity: 6, price: 18.00, description: "Alicate profesional para cutículas" }
+];
+
+// Gestión de diseños de Halloween
+let halloweenDesigns = JSON.parse(localStorage.getItem('nailBeautyHalloween')) || [
+  {
+    id: 1,
+    name: "Diseño Calavera con telaraña",
+    description: "Diseño calavera con telarañas.",
+    price: 55000,
+    image: "Diseño calavera con telarañas.jpeg"
+  },
+  {
+    id: 2,
+    name: "Diseño Fantasmas",
+    description: "Diseño con fantasmas.",
+    price: 60000,
+    image: "Diseño fantasmas.jpeg"
+  },
+  {
+    id: 3,
+    name: "Diseño Chicas super poderosas",
+    description: "Diseño Chicas super poderosas.",
+    price: 58000,
+    image: "Diseño chicas super poderosas (1).jpeg"
+  },
+  {
+    id: 4,
+    name: "Diseño fantasma rosado",
+    description: "Diseño fantasma rosado.",
+    price: 62000,
+    image: "Diseño fantasma rosado.jpeg"
+    
+  },
+  {id: 5,
+    name: "Diseño calavera negra",
+    description: "Diseño calavera negra.",
+    price: 62000,
+    image: "Diseño calaveras.jpeg"
+}
+];
+
+let isAdmin = false;
+let currentServiceToBook = "";
+
+// Navegación entre secciones
+function showSection(section) {
+  document.querySelectorAll('.main-nav button').forEach(btn => {
+    btn.classList.remove('active');
+  });
+  event.target.classList.add('active');
+  
+  document.getElementById('home').style.display = 'none';
+  document.getElementById('services').style.display = 'none';
+  document.getElementById('seasonal').style.display = 'none';
+  document.getElementById('gallery').style.display = 'none';
+  document.getElementById('booking').style.display = 'none';
+  document.getElementById('check-appointment').style.display = 'none';
+  document.getElementById('admin').style.display = 'none';
+  document.getElementById('info').style.display = 'none';
+  
+  document.getElementById(section).style.display = 'block';
+  
+  // Si estamos en la sección de admin y estamos logueados, actualizar la tabla
+  if (section === 'admin' && isAdmin) {
+    updateAppointmentsTable();
+    updateInventoryTable();
+    updateHalloweenDesignsList();
+  }
+  
+  // Si estamos en la sección de Halloween, actualizar los diseños
+  if (section === 'seasonal') {
+    updateHalloweenSection();
+  }
+  
+  // Manejar la visibilidad de las sidebars
+  if (section === 'home') {
+    document.getElementById('homeSidebar').style.display = 'block';
+    document.getElementById('otherSidebar').style.display = 'none';
+  } else {
+    document.getElementById('homeSidebar').style.display = 'none';
+    document.getElementById('otherSidebar').style.display = 'block';
+  }
+}
+
+// Gestión de servicios - FUNCIÓN MODIFICADA PARA MÚLTIPLES IMÁGENES
+function openServiceModal(name, description, price, imageUrls) {
+  document.getElementById('modalServiceName').textContent = name;
+  document.getElementById('modalServiceDescription').textContent = description;
+  document.getElementById('modalServicePrice').textContent = price;
+  
+  const galleryThumbs = document.getElementById('serviceGalleryThumbs');
+  const mainImage = document.getElementById('modalServiceMainImage');
+  
+  // Limpiar galería anterior
+  galleryThumbs.innerHTML = '';
+  
+  // Mostrar imágenes si están disponibles
+  if (imageUrls && imageUrls.length > 0) {
+    // Mostrar primera imagen como principal
+    mainImage.src = imageUrls[0];
+    mainImage.style.display = 'block';
+    
+    // Crear miniaturas para todas las imágenes
+    imageUrls.forEach((imageUrl, index) => {
+      const thumb = document.createElement('img');
+      thumb.src = imageUrl;
+      thumb.alt = `Imagen ${index + 1} de ${name}`;
+      thumb.className = `service-thumb ${index === 0 ? 'active' : ''}`;
+      thumb.onclick = () => {
+        // Cambiar imagen principal
+        mainImage.src = imageUrl;
+        
+        // Remover clase active de todas las miniaturas
+        document.querySelectorAll('.service-thumb').forEach(t => t.classList.remove('active'));
+        
+        // Agregar clase active a la miniatura clickeada
+        thumb.classList.add('active');
+      };
+      
+      galleryThumbs.appendChild(thumb);
+    });
+  } else {
+    // Ocultar galería si no hay imágenes
+    mainImage.style.display = 'none';
+    galleryThumbs.style.display = 'none';
+  }
+  
+  currentServiceToBook = name;
+  document.getElementById('serviceModal').style.display = 'flex';
+}
+
+function closeServiceModal() {
+  document.getElementById('serviceModal').style.display = 'none';
+}
+
+function bookThisService() {
+  closeServiceModal();
+  showSection('booking');
+  document.getElementById('service').value = currentServiceToBook;
+}
+
+// Función para reservar un servicio de temporada
+function bookSeasonalService(serviceName, price) {
+  currentServiceToBook = serviceName;
+  showSection('booking');
+  document.getElementById('service').value = serviceName;
+  
+  // Mostrar un mensaje especial para servicios de temporada
+  setTimeout(() => {
+    alert(`¡Perfecto! Has seleccionado ${serviceName}. Recuerda que este diseño especial de Halloween solo está disponible durante octubre.`);
+  }, 500);
+}
+
+// Gestión de galería
+let currentGalleryIndex = 0;
+const galleryImages = [
+  'Acrilicas 1.jpeg',
+  'Acrilicas 2.jpeg',
+  'Acrilicas 3.jpeg',
+  'Acrilicas 4.jpeg',
+  'Acrilicas 5.jpeg',
+  'Acrilicas 6.jpeg',
+  'Press on 1.jpeg',
+  'Press on 2.jpeg',
+  'Press on 3.jpeg',
+  'Press on 4.jpeg',
+  'Baño en acrilico 1.jpeg',
+  'Baño en acrilico 2.jpeg',
+  'Baño en acrilico 3.jpeg',
+  'Baño en acrilico 4.jpeg',
+  'Baño en acrilico 5.jpeg',
+  '',
+];
+
+function openGallery(index) {
+  currentGalleryIndex = index;
+  document.getElementById('galleryImg').src = galleryImages[index];
+  document.getElementById('galleryModal').style.display = 'flex';
+}
+
+function closeGallery() {
+  document.getElementById('galleryModal').style.display = 'none';
+}
+
+function changeGalleryImage(direction) {
+  currentGalleryIndex += direction;
+  
+  if (currentGalleryIndex >= galleryImages.length) {
+    currentGalleryIndex = 0;
+  } else if (currentGalleryIndex < 0) {
+    currentGalleryIndex = galleryImages.length - 1;
+  }
+  
+  document.getElementById('galleryImg').src = galleryImages[currentGalleryIndex];
+}
+
+// Gestión de reservas
+function submitBooking(event) {
+  event.preventDefault();
+  
+  // Validación básica
+  const name = document.getElementById('name');
+  const email = document.getElementById('email');
+  const phone = document.getElementById('phone');
+  const service = document.getElementById('service');
+  const date = document.getElementById('date');
+  const time = document.getElementById('time');
+  
+  let isValid = true;
+  
+  // Limpiar mensajes de error
+  document.querySelectorAll('.error-message').forEach(el => {
+    el.textContent = '';
+  });
+  
+  // Validar campos
+  if (!name.value.trim()) {
+    document.getElementById('nameError').textContent = 'El nombre es obligatorio';
+    isValid = false;
+  }
+  
+  if (!email.value.trim() || !isValidEmail(email.value)) {
+    document.getElementById('emailError').textContent = 'Ingresa un correo electrónico válido';
+    isValid = false;
+  }
+  
+  if (!phone.value.trim()) {
+    document.getElementById('phoneError').textContent = 'El teléfono es obligatorio';
+    isValid = false;
+  }
+  
+  if (!service.value) {
+    document.getElementById('serviceError').textContent = 'Selecciona un servicio';
+    isValid = false;
+  }
+  
+  if (!date.value) {
+    document.getElementById('dateError').textContent = 'Selecciona una fecha';
+    isValid = false;
+  }
+  
+  if (!time.value) {
+    document.getElementById('timeError').textContent = 'Selecciona una hora';
+    isValid = false;
+  }
+  
+  if (isValid) {
+    // Generar ID único para la cita
+    const newId = appointments.length > 0 ? Math.max(...appointments.map(a => a.id)) + 1 : 1;
+    
+    // Agregar la cita a la lista
+    const newAppointment = {
+      id: newId,
+      client: name.value,
+      email: email.value,
+      phone: phone.value,
+      service: service.value,
+      date: date.value,
+      time: time.value,
+      notes: document.getElementById('notes').value,
+      status: 'pending',
+      createdAt: new Date().toISOString()
+    };
+    
+    appointments.push(newAppointment);
+    
+    // Guardar en localStorage
+    saveAppointments(appointments);
+    
+    // Si el admin está logueado, actualizar la tabla
+    if (isAdmin) {
+      updateAppointmentsTable();
+    }
+    
+    alert('¡Reserva realizada con éxito! Te contactaremos pronto para confirmar.');
+    document.getElementById('bookingForm').reset();
+  }
+}
+
+// Consultar cita
+function checkAppointment(event) {
+  event.preventDefault();
+  
+  const email = document.getElementById('checkEmail').value;
+  const resultDiv = document.getElementById('appointmentResult');
+  
+  if (!email || !isValidEmail(email)) {
+    document.getElementById('checkEmailError').textContent = 'Ingresa un correo electrónico válido';
+    return;
+  }
+  
+  // Buscar citas con este email
+  const userAppointments = appointments.filter(apt => apt.email === email);
+  
+  if (userAppointments.length === 0) {
+    resultDiv.innerHTML = '<div class="error-message">No se encontraron citas con este correo electrónico.</div>';
+  } else {
+    let html = '<h3>Tus Citas:</h3>';
+    
+    userAppointments.forEach(apt => {
+      html += `
+        <div class="panel-block" style="margin-top: 10px;">
+          <p><strong>Servicio:</strong> ${apt.service}</p>
+          <p><strong>Fecha:</strong> ${formatDate(apt.date)}</p>
+          <p><strong>Hora:</strong> ${apt.time}</p>
+          <p><strong>Estado:</strong> <span class="status-badge status-${apt.status}">${getStatusText(apt.status)}</span></p>
+        </div>
+      `;
+    });
+    
+    resultDiv.innerHTML = html;
+  }
+  
+  resultDiv.style.display = 'block';
+  document.getElementById('checkEmailError').textContent = '';
+}
+
+function isValidEmail(email) {
+  const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return re.test(email);
+}
+
+// Gestión de administrador
+function openAdminLogin() {
+  document.getElementById('adminLogin').style.display = 'flex';
+}
+
+function closeAdminLogin() {
+  document.getElementById('adminLogin').style.display = 'none';
+  document.getElementById('loginError').textContent = '';
+  document.getElementById('loginForm').reset();
+}
+
+function adminLogin(event) {
+  event.preventDefault();
+  
+  const username = document.getElementById('adminUsername').value;
+  const password = document.getElementById('adminPassword').value;
+  
+  // Credenciales de administrador
+  if (username === 'admin' && password === 'nailbeauty2023') {
+    isAdmin = true;
+    document.getElementById('adminTab').style.display = 'block';
+    document.getElementById('admin').classList.remove('admin-panel');
+    closeAdminLogin();
+    showSection('admin');
+    updateAppointmentsTable();
+    updateInventoryTable();
+    updateHalloweenDesignsList();
+  } else {
+    document.getElementById('loginError').textContent = 'Usuario o contraseña incorrectos';
+  }
+}
+
+// Actualizar tabla de citas
+function updateAppointmentsTable() {
+  const tbody = document.querySelector('#appointmentsTable tbody');
+  tbody.innerHTML = '';
+  
+  // Ordenar citas por fecha y hora (más recientes primero)
+  const sortedAppointments = [...appointments].sort((a, b) => {
+    const dateA = new Date(`${a.date}T${a.time}`);
+    const dateB = new Date(`${b.date}T${b.time}`);
+    return dateB - dateA;
+  });
+  
+  sortedAppointments.forEach(appointment => {
+    const row = document.createElement('tr');
+    
+    // Cliente
+    const clientCell = document.createElement('td');
+    clientCell.textContent = appointment.client;
+    
+    // Email
+    const emailCell = document.createElement('td');
+    emailCell.textContent = appointment.email;
+    
+    // Servicio
+    const serviceCell = document.createElement('td');
+    serviceCell.textContent = appointment.service;
+    
+    // Fecha
+    const dateCell = document.createElement('td');
+    dateCell.textContent = formatDate(appointment.date);
+    
+    // Hora
+    const timeCell = document.createElement('td');
+    timeCell.textContent = appointment.time;
+    
+    // Estado
+    const statusCell = document.createElement('td');
+    const statusBadge = document.createElement('span');
+    statusBadge.className = `status-badge status-${appointment.status}`;
+    statusBadge.textContent = getStatusText(appointment.status);
+    statusCell.appendChild(statusBadge);
+    
+    // Acciones
+    const actionsCell = document.createElement('td');
+    
+    const confirmBtn = document.createElement('button');
+    confirmBtn.className = 'small-btn btn-success';
+    confirmBtn.textContent = 'Confirmar';
+    confirmBtn.onclick = () => changeAppointmentStatus(appointment.id, 'confirmed');
+    
+    const completeBtn = document.createElement('button');
+    completeBtn.className = 'small-btn btn-success';
+    completeBtn.textContent = 'Completar';
+    completeBtn.onclick = () => changeAppointmentStatus(appointment.id, 'completed');
+    
+    const cancelBtn = document.createElement('button');
+    cancelBtn.className = 'small-btn btn-danger';
+    cancelBtn.textContent = 'Cancelar';
+    cancelBtn.onclick = () => changeAppointmentStatus(appointment.id, 'cancelled');
+    
+    const deleteBtn = document.createElement('button');
+    deleteBtn.className = 'small-btn btn-danger';
+    deleteBtn.textContent = 'Eliminar';
+    deleteBtn.onclick = () => deleteAppointment(appointment.id);
+    
+    // Mostrar botones según el estado
+    if (appointment.status === 'pending') {
+      actionsCell.appendChild(confirmBtn);
+      actionsCell.appendChild(cancelBtn);
+    } else if (appointment.status === 'confirmed') {
+      actionsCell.appendChild(completeBtn);
+      actionsCell.appendChild(cancelBtn);
+    }
+    
+    // Siempre mostrar botón de eliminar
+    actionsCell.appendChild(deleteBtn);
+    
+    row.appendChild(clientCell);
+    row.appendChild(emailCell);
+    row.appendChild(serviceCell);
+    row.appendChild(dateCell);
+    row.appendChild(timeCell);
+    row.appendChild(statusCell);
+    row.appendChild(actionsCell);
+    
+    tbody.appendChild(row);
+  });
+}
+
+function formatDate(dateString) {
+  const options = { year: 'numeric', month: '2-digit', day: '2-digit' };
+  return new Date(dateString).toLocaleDateString('es-ES', options);
+}
+
+function getStatusText(status) {
+  const statusMap = {
+    'pending': 'Pendiente',
+    'confirmed': 'Confirmada',
+    'completed': 'Completada',
+    'cancelled': 'Cancelada'
+  };
+  
+  return statusMap[status] || status;
+}
+
+function changeAppointmentStatus(id, newStatus) {
+  const appointment = appointments.find(a => a.id === id);
+  if (appointment) {
+    appointment.status = newStatus;
+    saveAppointments(appointments); // Guardar cambios en localStorage
+    updateAppointmentsTable();
+  }
+}
+
+function deleteAppointment(id) {
+  if (confirm('¿Estás seguro de que quieres eliminar esta cita?')) {
+    appointments = appointments.filter(a => a.id !== id);
+    saveAppointments(appointments); // Guardar cambios en localStorage
+    updateAppointmentsTable();
+  }
+}
+
+// Gestión de inventario
+function updateInventoryTable() {
+  const tbody = document.querySelector('#inventoryTable tbody');
+  tbody.innerHTML = '';
+  
+  inventory.forEach(product => {
+    const row = document.createElement('tr');
+    
+    // Nombre
+    const nameCell = document.createElement('td');
+    nameCell.textContent = product.name;
+    
+    // Categoría
+    const categoryCell = document.createElement('td');
+    categoryCell.textContent = product.category;
+    
+    // Cantidad
+    const quantityCell = document.createElement('td');
+    quantityCell.textContent = product.quantity;
+    
+    // Precio
+    const priceCell = document.createElement('td');
+    priceCell.textContent = `$${product.price.toFixed(2)}`;
+    
+    // Acciones
+    const actionsCell = document.createElement('td');
+    
+    const editBtn = document.createElement('button');
+    editBtn.className = 'small-btn';
+    editBtn.textContent = 'Editar';
+    editBtn.onclick = () => editProduct(product.id);
+    
+    const deleteBtn = document.createElement('button');
+    deleteBtn.className = 'small-btn btn-danger';
+    deleteBtn.textContent = 'Eliminar';
+    deleteBtn.onclick = () => deleteProduct(product.id);
+    
+    actionsCell.appendChild(editBtn);
+    actionsCell.appendChild(deleteBtn);
+    
+    row.appendChild(nameCell);
+    row.appendChild(categoryCell);
+    row.appendChild(quantityCell);
+    row.appendChild(priceCell);
+    row.appendChild(actionsCell);
+    
+    tbody.appendChild(row);
+  });
+}
+
+function showInventoryForm() {
+  document.getElementById('inventoryForm').style.display = 'block';
+  document.getElementById('inventoryFormTitle').textContent = 'Agregar Producto';
+  document.getElementById('productForm').reset();
+  document.getElementById('productId').value = '';
+}
+
+function hideInventoryForm() {
+  document.getElementById('inventoryForm').style.display = 'none';
+}
+
+function editProduct(id) {
+  const product = inventory.find(p => p.id === id);
+  if (product) {
+    document.getElementById('inventoryForm').style.display = 'block';
+    document.getElementById('inventoryFormTitle').textContent = 'Editar Producto';
+    
+    document.getElementById('productId').value = product.id;
+    document.getElementById('productName').value = product.name;
+    document.getElementById('productCategory').value = product.category;
+    document.getElementById('productQuantity').value = product.quantity;
+    document.getElementById('productPrice').value = product.price;
+    document.getElementById('productDescription').value = product.description || '';
+  }
+}
+
+function saveProduct(event) {
+  event.preventDefault();
+  
+  const id = document.getElementById('productId').value;
+  const name = document.getElementById('productName').value;
+  const category = document.getElementById('productCategory').value;
+  const quantity = parseInt(document.getElementById('productQuantity').value);
+  const price = parseFloat(document.getElementById('productPrice').value);
+  const description = document.getElementById('productDescription').value;
+  
+  if (id) {
+    // Editar producto existente
+    const productIndex = inventory.findIndex(p => p.id === parseInt(id));
+    if (productIndex !== -1) {
+      inventory[productIndex] = {
+        ...inventory[productIndex],
+        name,
+        category,
+        quantity,
+        price,
+        description
+      };
+    }
+  } else {
+    // Agregar nuevo producto
+    const newProduct = {
+      id: inventory.length > 0 ? Math.max(...inventory.map(p => p.id)) + 1 : 1,
+      name,
+      category,
+      quantity,
+      price,
+      description
+    };
+    
+    inventory.push(newProduct);
+  }
+  
+  updateInventoryTable();
+  hideInventoryForm();
+  alert('Producto guardado exitosamente');
+}
+
+function deleteProduct(id) {
+  if (confirm('¿Estás seguro de que quieres eliminar este producto?')) {
+    inventory = inventory.filter(p => p.id !== id);
+    updateInventoryTable();
+  }
+}
+
+// Gestión de diseños de Halloween
+function saveHalloweenDesign(event) {
+  event.preventDefault();
+  
+  const name = document.getElementById('designName').value;
+  const description = document.getElementById('designDescription').value;
+  const price = parseInt(document.getElementById('designPrice').value);
+  const imageFile = document.getElementById('designImage').files[0];
+  
+  if (!imageFile) {
+    alert('Por favor selecciona una imagen');
+    return;
+  }
+  
+  // Convertir imagen a Base64
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    const newDesign = {
+      id: halloweenDesigns.length > 0 ? Math.max(...halloweenDesigns.map(d => d.id)) + 1 : 1,
+      name,
+      description,
+      price,
+      image: e.target.result // Guardar como Base64
+    };
+    
+    halloweenDesigns.push(newDesign);
+    localStorage.setItem('nailBeautyHalloween', JSON.stringify(halloweenDesigns));
+    updateHalloweenSection();
+    updateHalloweenDesignsList();
+    updateServiceOptions();
+    alert('Diseño guardado exitosamente');
+    document.getElementById('halloweenForm').reset();
+    document.getElementById('designImagePreview').innerHTML = '';
+  };
+  
+  reader.readAsDataURL(imageFile);
+}
+
+function previewDesignImage(event) {
+  const file = event.target.files[0];
+  if (file) {
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      document.getElementById('designImagePreview').innerHTML = 
+        `<img src="${e.target.result}" style="max-width: 200px; border-radius: 8px;">`;
+    };
+    reader.readAsDataURL(file);
+  }
+}
+
+function updateHalloweenSection() {
+  // Actualizar la sección de temporada con los diseños guardados
+  const seasonalGrid = document.getElementById('seasonalDesignsGrid');
+  if (seasonalGrid) {
+    seasonalGrid.innerHTML = '';
+    
+    halloweenDesigns.forEach(design => {
+      seasonalGrid.innerHTML += `
+        <div class="seasonal-card">
+          <div class="seasonal-image">
+            <img src="${design.image}" alt="${design.name}">
+          </div>
+          <h3>${design.name}</h3>
+          <p>${design.description}</p>
+          <p class="price">$${design.price.toLocaleString()}</p>
+          <button class="btn" onclick="bookSeasonalService('${design.name}', ${design.price})">Reservar</button>
+        </div>
+      `;
+    });
+  }
+}
+
+function updateHalloweenDesignsList() {
+  const designsList = document.getElementById('halloweenDesignsList');
+  if (designsList) {
+    designsList.innerHTML = '';
+    
+    halloweenDesigns.forEach(design => {
+      designsList.innerHTML += `
+        <div class="halloween-design-item">
+          <img src="${design.image}" alt="${design.name}">
+          <div class="halloween-design-info">
+            <h4>${design.name}</h4>
+            <p>$${design.price.toLocaleString()}</p>
+          </div>
+          <div class="halloween-design-actions">
+            <button class="small-btn btn-danger" onclick="deleteHalloweenDesign(${design.id})">Eliminar</button>
+          </div>
+        </div>
+      `;
+    });
+  }
+}
+
+function deleteHalloweenDesign(id) {
+  if (confirm('¿Estás seguro de que quieres eliminar este diseño?')) {
+    halloweenDesigns = halloweenDesigns.filter(design => design.id !== id);
+    localStorage.setItem('nailBeautyHalloween', JSON.stringify(halloweenDesigns));
+    updateHalloweenSection();
+    updateHalloweenDesignsList();
+    updateServiceOptions();
+  }
+}
+
+function updateServiceOptions() {
+  const serviceSelect = document.getElementById('service');
+  // Eliminar opciones anteriores de Halloween
+  const halloweenOptions = Array.from(serviceSelect.options).filter(option => 
+    option.value.includes('Halloween')
+  );
+  halloweenOptions.forEach(option => option.remove());
+  
+  // Agregar nuevas opciones de Halloween
+  halloweenDesigns.forEach(design => {
+    const option = document.createElement('option');
+    option.value = design.name;
+    option.textContent = design.name;
+    serviceSelect.appendChild(option);
+  });
+}
+
+// Inicialización
+document.addEventListener('DOMContentLoaded', function() {
+  // Mostrar la sección de inicio por defecto
+  showSection('home');
+  
+  // Actualizar las opciones de servicios con los diseños de Halloween
+  updateServiceOptions();
+});
+</script>
+</body>
+</html>
