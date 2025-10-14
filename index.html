@@ -322,14 +322,14 @@ th{background:linear-gradient(90deg,var(--lav-3),var(--lav-4));color:#fff}
             'Uñas acrílicas', 
             'Extensiones artificiales creadas a partir de una mezcla de polímero en polvo y monómero líquido que se adhieren a la uña natural para darles mayor longitud, grosor y resistencia.', 
             100000, 
-            ['Acrilicas 1.jpeg', 'Acrilicas 2.jpeg', 'Acrilicas 3.jpeg', 'Acrilicas 4.jpeg', 'Acrilicas 5.jpeg', 'Acrilicas 6.jpeg' ]
+            ['acrilicas 1.jpeg', 'acrilicas 2.jpeg', 'acrilicas 3.jpeg', 'acrilicas 4.jpeg', 'acrilicas 5.jpeg', 'acrilicas 6.jpeg' ]
           )">Uñas acrílicas</button>
           
           <button class="service-btn" onclick="openServiceModal(
             'Press on', 
             'Uñas postizas de alta calidad que se adhieren temporalmente a tus uñas naturales, perfectas para ocasiones especiales o cambio rápido de look.', 
             50000, 
-            ['Press on 1.jpeg', 'Press on 2.jpeg', 'Press on 3.jpeg', 'Press on 4.jpeg', 'Press on 5.jpeg']
+            ['Press on 1.jpeg', 'Press on 2.jpeg', 'Press on 3.jpeg', 'Press on 4.jpeg', 'Press on 5.jpeg', 'Press on 6.jpeg']
           )">Press on</button>
           
           <button class="service-btn" onclick="openServiceModal(
@@ -343,7 +343,7 @@ th{background:linear-gradient(90deg,var(--lav-3),var(--lav-4));color:#fff}
             'Base Rubber', 
             'Esmalte de gel que dura hasta 3 semanas con acabado brillante y resistencia superior.', 
             45000, 
-            ['Base Rubber 1.jpeg', 'Base Rubber 2.jpeg', 'Base Rubber 3.jpeg']
+            ['Base Rubber 1.jpeg', 'Imagen 14.jpeg', 'Imagen 15.jpeg']
           )">Base Rubber</button>
           
           <button class="service-btn" onclick="openServiceModal(
@@ -398,8 +398,6 @@ th{background:linear-gradient(90deg,var(--lav-3),var(--lav-4));color:#fff}
           <div class="gal-card"><img src="Baño en acrilico 4.jpeg" alt="Trabajo de uñas 15" onclick="openGallery(14)"></div>
           <div class="gal-card"><img src="Baño en acrilico 5.jpeg" alt="Trabajo de uñas 16" onclick="openGallery(15)"></div>
           <div class="gal-card"><img src="Base Rubber 1.jpeg" alt="Trabajo de uñas 17" onclick="openGallery(15)"></div>
-           <div class="gal-card"><img src="Base Rubber 2.jpeg" alt="Trabajo de uñas 18" onclick="openGallery(15)"></div>
-           <div class="gal-card"><img src="Base Rubber 3.jpeg" alt="Trabajo de uñas 19" onclick="openGallery(15)"></div>
         </div>
       </div>
       
@@ -410,29 +408,27 @@ th{background:linear-gradient(90deg,var(--lav-3),var(--lav-4));color:#fff}
         <div class="form-centro">
           <form id="bookingForm" onsubmit="submitBooking(event)">
             <div class="form-group">
-              <div class="form-group">
-  <label for="name" class="small required">Nombre completo</label>
-  <input type="text" id="name" name="name" required 
-         onkeypress="return /[a-zA-ZáéíóúÁÉÍÓÚñÑ ]/.test(event.key)"
-         oninput="this.value = this.value.replace(/[^a-zA-ZáéíóúÁÉÍÓÚñÑ ]/g,'')">
-  <div class="error-message" id="nameError"></div>
-</div>
-
-<div class="form-group">
-  <label for="phone" class="small required">Teléfono</label>
-  <input type="text" id="phone" name="phone" required 
-         onkeypress="return /[0-9]/.test(event.key)"
-         oninput="this.value = this.value.replace(/[^0-9]/g,'')"
-         maxlength="10">
-  <div class="error-message" id="phoneError"></div>
-</div>
-
-<div class="form-group">
-  <label for="email" class="small required">Correo electrónico</label>
-  <input type="email" id="email" name="email" required 
-         pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$">
-  <div class="error-message" id="emailError"></div>
-</div>/div>
+              <label for="name" class="small required">Nombre completo</label>
+              <input type="text" id="name" name="name" required 
+                     onkeypress="return /[a-zA-ZáéíóúÁÉÍÓÚñÑ ]/.test(event.key)"
+                     oninput="this.value = this.value.replace(/[^a-zA-ZáéíóúÁÉÍÓÚñÑ ]/g,'')">
+              <div class="error-message" id="nameError"></div>
+            </div>
+            
+            <div class="form-group">
+              <label for="email" class="small required">Correo electrónico</label>
+              <input type="email" id="email" name="email" required 
+                     pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$">
+              <div class="error-message" id="emailError"></div>
+            </div>
+            
+            <div class="form-group">
+              <label for="phone" class="small required">Teléfono</label>
+              <input type="text" id="phone" name="phone" required 
+                     onkeypress="return /[0-9]/.test(event.key)"
+                     oninput="this.value = this.value.replace(/[^0-9]/g,'')"
+                     maxlength="10">
+              <div class="error-message" id="phoneError"></div>
             </div>
             
             <div class="form-group">
@@ -548,7 +544,8 @@ th{background:linear-gradient(90deg,var(--lav-3),var(--lav-4));color:#fff}
             
             <div class="form-group">
               <label for="productName" class="small required">Nombre del Producto</label>
-              <input type="text" id="productName" required>
+              <input type="text" id="productName" required 
+                     onkeypress="return /[a-zA-ZáéíóúÁÉÍÓÚñÑ0-9 ]/.test(event.key)">
             </div>
             
             <div class="form-group">
@@ -566,12 +563,15 @@ th{background:linear-gradient(90deg,var(--lav-3),var(--lav-4));color:#fff}
             
             <div class="form-group">
               <label for="productQuantity" class="small required">Cantidad</label>
-              <input type="number" id="productQuantity" min="0" required>
+              <input type="number" id="productQuantity" min="0" required 
+                     onkeypress="return /[0-9]/.test(event.key)">
             </div>
             
             <div class="form-group">
               <label for="productPrice" class="small required">Precio ($)</label>
-              <input type="number" id="productPrice" min="0" step="0.01" required>
+              <input type="number" id="productPrice" min="0" step="0.01" required 
+                     onkeypress="return /[0-9.]/.test(event.key)"
+                     oninput="this.value = this.value.replace(/[^0-9.]/g,'')">
             </div>
             
             <div class="form-group">
@@ -596,24 +596,16 @@ th{background:linear-gradient(90deg,var(--lav-3),var(--lav-4));color:#fff}
                 <label class="small required">Nombre del Diseño</label>
                 <input type="text" id="designName" required>
               </div>
+              
               <div class="form-group">
-  <label for="productName" class="small required">Nombre del Producto</label>
-  <input type="text" id="productName" required 
-         onkeypress="return /[a-zA-ZáéíóúÁÉÍÓÚñÑ0-9 ]/.test(event.key)">
-</div>
-
-<div class="form-group">
-  <label for="productQuantity" class="small required">Cantidad</label>
-  <input type="number" id="productQuantity" min="0" required 
-         onkeypress="return /[0-9]/.test(event.key)">
-</div>
-
-<div class="form-group">
-  <label for="productPrice" class="small required">Precio ($)</label>
-  <input type="number" id="productPrice" min="0" step="0.01" required 
-         onkeypress="return /[0-9.]/.test(event.key)"
-         oninput="this.value = this.value.replace(/[^0-9.]/g,'')">
-</div>
+                <label class="small required">Descripción</label>
+                <textarea id="designDescription" required rows="2"></textarea>
+              </div>
+              
+              <div class="form-group">
+                <label class="small required">Precio</label>
+                <input type="number" id="designPrice" required>
+              </div>
               
               <div class="form-group">
                 <label class="small required">Imagen del Diseño</label>
@@ -653,7 +645,8 @@ th{background:linear-gradient(90deg,var(--lav-3),var(--lav-4));color:#fff}
             
             <h3 style="margin-top: 30px;">Nuestra Ubicación</h3>
             <div class="panel-block">
-           <p><strong>Barrio:</strong> La serafina</p>
+              <p><strong>Dirección:</strong> Calle Principal 123, Ciudad</p>
+              <p><strong>Barrio:</strong> La serafina</p>
               <p>Facil acceso, cerca de Jumbo 20 de Julio</p>
               
               <!-- Mapa de Google Maps -->
@@ -708,7 +701,7 @@ th{background:linear-gradient(90deg,var(--lav-3),var(--lav-4));color:#fff}
             <li>Uñas acrilicas</li>
             <li>Semipermanente</li>
             <li>Press on</li>
-            <li>Base rubber</li>
+            <li>Base ruber</li>
             <li>Baño en acrilico</li>
           </ul>
         </div>
@@ -727,7 +720,7 @@ th{background:linear-gradient(90deg,var(--lav-3),var(--lav-4));color:#fff}
             <li>Uñas acrilicas</li>
             <li>Semipermanente</li>
             <li>Press on</li>
-            <li>Base rubber</li>
+            <li>Base ruber</li>
             <li>Baño en acrilico</li>
           </ul>
         </div>
@@ -847,7 +840,14 @@ let halloweenDesigns = JSON.parse(localStorage.getItem('nailBeautyHalloween')) |
     description: "Diseño fantasma rosado.",
     price: 62000,
     image: "Diseño fantasma rosado.jpeg"
- 
+    
+  },
+  {id: 5,
+    name: "Diseño calavera negra",
+    description: "Diseño calavera negra.",
+    price: 62000,
+    image: "Diseño calaveras.jpeg"
+}
 ];
 
 let isAdmin = false;
@@ -980,9 +980,6 @@ const galleryImages = [
   'Baño en acrilico 3.jpeg',
   'Baño en acrilico 4.jpeg',
   'Baño en acrilico 5.jpeg',
-  'Base Rubber 1.jpeg',
-  'Base Rubber 2.jpeg',
-  'Base Rubber 3.jpeg',
   '',
 ];
 
@@ -1518,23 +1515,22 @@ function deleteHalloweenDesign(id) {
 }
 
 function updateServiceOptions() {
-    const serviceSelect = document.getElementById('service');
-    // Eliminar opciones anteriores de Halloween
-    const halloweenOptions = Array.from(serviceSelect.options).filter(option =>
-        option.value.includes('Halloween')
-    );
-    halloweenOptions.forEach(option => option.remove());
-
-    // Agregar nuevas opciones de Halloween
-    halloweenDesigns.forEach(design => {
-        const option = document.createElement('option');
-        option.value = design.name;
-        option.textContent = design.name;
-        serviceSelect.appendChild(option);
-    });
+  const serviceSelect = document.getElementById('service');
+  // Eliminar opciones anteriores de Halloween
+  const halloweenOptions = Array.from(serviceSelect.options).filter(option => 
+    option.value.includes('Halloween')
+  );
+  halloweenOptions.forEach(option => option.remove());
+  
+  // Agregar nuevas opciones de Halloween
+  halloweenDesigns.forEach(design => {
+    const option = document.createElement('option');
+    option.value = design.name;
+    option.textContent = design.name;
+    serviceSelect.appendChild(option);
+  });
 }
 
-// ========== AGREGAR AQUÍ EL CÓDIGO DE VALIDACIONES ==========
 // Validaciones en tiempo real para formularios
 document.addEventListener('DOMContentLoaded', function() {
     // Validación para campo de nombre (solo letras)
@@ -1561,16 +1557,14 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 });
-// ========== FIN DEL CÓDIGO DE VALIDACIONES ==========
 
 // Inicialización
 document.addEventListener('DOMContentLoaded', function() {
-    // Mostrar la sección de inicio por defecto
-    showSection('home');
+  // Mostrar la sección de inicio por defecto
+  showSection('home');
 
-    // Actualizar las opciones de servicios con los diseños de Halloween
-    updateServiceOptions();
-});
+  // Actualizar las opciones de servicios con los diseños de Halloween
+  updateServiceOptions();
 });
 </script>
 </body>
