@@ -291,6 +291,49 @@ th{background:linear-gradient(90deg,var(--lav-3),var(--lav-4));color:#fff}
   padding: 10px;
   background: var(--lav-1);
 }
+
+/* Service Admin Styles */
+.service-admin-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 15px;
+  margin-top: 15px;
+}
+
+.service-admin-item {
+  border: 1px solid var(--lav-2);
+  border-radius: 8px;
+  overflow: hidden;
+  position: relative;
+}
+
+.service-admin-item img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+}
+
+.service-admin-info {
+  padding: 10px;
+}
+
+.service-admin-info h4 {
+  margin: 0 0 5px;
+  font-size: 0.9rem;
+}
+
+.service-admin-info p {
+  margin: 0;
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+
+.service-admin-actions {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  background: var(--lav-1);
+}
 </style>
 </head>
 <body>
@@ -354,42 +397,8 @@ th{background:linear-gradient(90deg,var(--lav-3),var(--lav-4));color:#fff}
       <!-- Services Section -->
       <div id="services" class="card" style="display:none">
         <h2>Nuestros Servicios</h2>
-        <div class="service-grid">
-          <button class="service-btn" onclick="openServiceModal(
-            'Uñas acrílicas', 
-            'Extensiones artificiales creadas a partir de una mezcla de polímero en polvo y monómero líquido que se adhieren a la uña natural para darles mayor longitud, grosor y resistencia.', 
-            100000, 
-            ['acrilicas 1.jpeg', 'acrilicas 2.jpeg', 'acrilicas 3.jpeg', 'acrilicas 4.jpeg', 'acrilicas 5.jpeg', 'acrilicas 6.jpeg' ]
-          )">Uñas acrílicas</button>
-          
-          <button class="service-btn" onclick="openServiceModal(
-            'Press on', 
-            'Uñas postizas de alta calidad que se adhieren temporalmente a tus uñas naturales, perfectas para ocasiones especiales o cambio rápido de look.', 
-            50000, 
-            ['Press on 1.jpeg', 'Press on 2.jpeg', 'Press on 3.jpeg', 'Press on 4.jpeg', 'Press on 5.jpeg', 'Press on 6.jpeg']
-          )">Press on</button>
-          
-          <button class="service-btn" onclick="openServiceModal(
-            'Baño en acrílico', 
-            'Técnica que fortalece las uñas naturales aplicando una capa delgada de acrílico para darles mayor resistencia y durabilidad.', 
-            80000, 
-            ['Baño en acrilico 1.jpeg', 'Baño en acrilico 2.jpeg', 'Baño en acrilico 3.jpeg', 'Baño en acrilico 4.jpeg', 'Baño en acrilico 5.jpeg']
-          )">Baño en acrílico</button>
-          
-          <button class="service-btn" onclick="openServiceModal(
-            'Base Rubber', 
-            'Esmalte de gel que dura hasta 3 semanas con acabado brillante y resistencia superior.', 
-            45000, 
-            ['Base Rubber 1.jpeg', 'Imagen 14.jpeg', 'Imagen 15.jpeg']
-          )">Base Rubber</button>
-          
-          <button class="service-btn" onclick="openServiceModal(
-            'Semipermanente', 
-            'Técnica especializada para cutículas perfectas sin dolor ni cortes.', 
-            35000, 
-            ['Semipermanente 1.jpeg', 'Semipermanente 2.jpeg', 'Semipermanente 3.jpeg', 'Semipermanente 4.jpeg', 'Semipermanente 5.jpeg', 'Semipermanente 6.jpeg']
-          )">Semipermanente</button>
-          
+        <div class="service-grid" id="servicesGrid">
+          <!-- Los servicios se cargarán dinámicamente -->
         </div>
       </div>
       
@@ -450,12 +459,7 @@ th{background:linear-gradient(90deg,var(--lav-3),var(--lav-4));color:#fff}
               <label for="service" class="small required">Servicio</label>
               <select id="service" name="service" required>
                 <option value="">Selecciona un servicio</option>
-                <option value="Uñas acrílicas">Uñas acrílicas</option>
-                <option value="Press on">Press on</option>
-                <option value="Baño en acrílico">Baño en acrílico</option>
-                <option value="Base Rubber">Base Rubber</option>
-                <option value="Semipermanente">Semipermanente</option>
-                <!-- Las opciones de Halloween se agregarán dinámicamente -->
+                <!-- Las opciones se cargarán dinámicamente -->
               </select>
               <div class="error-message" id="serviceError"></div>
             </div>
@@ -507,6 +511,32 @@ th{background:linear-gradient(90deg,var(--lav-3),var(--lav-4));color:#fff}
       <div id="admin" class="card admin-panel">
         <h2>Panel de Administración</h2>
         
+        <!-- Configuración de Credenciales -->
+        <div class="panel-block">
+          <h3>Configuración de Acceso</h3>
+          <div class="form-group">
+            <h4>Cambiar Usuario y Contraseña</h4>
+            <form id="credentialsForm" onsubmit="updateCredentials(event)">
+              <div class="form-group">
+                <label class="small required">Nuevo Usuario</label>
+                <input type="text" id="newUsername" required>
+              </div>
+              
+              <div class="form-group">
+                <label class="small required">Nueva Contraseña</label>
+                <input type="password" id="newPassword" required>
+              </div>
+              
+              <div class="form-group">
+                <label class="small required">Confirmar Contraseña</label>
+                <input type="password" id="confirmPassword" required>
+              </div>
+              
+              <button type="submit" class="btn">Actualizar Credenciales</button>
+            </form>
+          </div>
+        </div>
+        
         <!-- Gestión de Citas -->
         <div class="panel-block">
           <h3>Citas Agendadas</h3>
@@ -528,71 +558,49 @@ th{background:linear-gradient(90deg,var(--lav-3),var(--lav-4));color:#fff}
           </table>
         </div>
         
-        <!-- Gestión de Inventario -->
+        <!-- Gestión de Servicios -->
         <div class="panel-block">
-          <h3>Gestión de Inventario</h3>
+          <h3>Gestión de Servicios</h3>
+          
+          <!-- Formulario para agregar servicio -->
           <div class="form-group">
-            <button class="btn" onclick="showInventoryForm()">Agregar Producto</button>
+            <h4>Agregar Nuevo Servicio</h4>
+            <form id="serviceForm" onsubmit="saveService(event)">
+              <div class="form-group">
+                <label class="small required">Nombre del Servicio</label>
+                <input type="text" id="serviceName" required>
+              </div>
+              
+              <div class="form-group">
+                <label class="small required">Descripción</label>
+                <textarea id="serviceDescription" required rows="3"></textarea>
+              </div>
+              
+              <div class="form-group">
+                <label class="small required">Precio</label>
+                <input type="number" id="servicePrice" required>
+              </div>
+              
+              <div class="form-group">
+                <label class="small required">Imágenes del Servicio</label>
+                <div class="upload-area" onclick="document.getElementById('serviceImages').click()">
+                  <p>Haz clic para seleccionar imágenes (múltiples)</p>
+                  <input type="file" id="serviceImages" accept="image/*" style="display:none" onchange="previewServiceImages(event)" multiple required>
+                </div>
+                <div id="serviceImagesPreview" class="upload-preview" style="margin-top: 10px;"></div>
+              </div>
+              
+              <button type="submit" class="btn">Guardar Servicio</button>
+            </form>
           </div>
           
-          <table id="inventoryTable">
-            <thead>
-              <tr>
-                <th>Producto</th>
-                <th>Categoría</th>
-                <th>Cantidad</th>
-                <th>Precio</th>
-                <th>Acciones</th>
-              </tr>
-            </thead>
-            <tbody>
-              <!-- Los productos se cargarán dinámicamente -->
-            </tbody>
-          </table>
-        </div>
-        
-        <!-- Formulario para agregar/editar productos -->
-        <div class="panel-block" id="inventoryForm" style="display:none">
-          <h3 id="inventoryFormTitle">Agregar Producto</h3>
-          <form id="productForm" onsubmit="saveProduct(event)">
-            <input type="hidden" id="productId">
-            
-            <div class="form-group">
-              <label for="productName" class="small required">Nombre del Producto</label>
-              <input type="text" id="productName" required>
+          <!-- Lista de servicios existentes -->
+          <div style="margin-top: 30px;">
+            <h4>Servicios Existentes</h4>
+            <div class="service-admin-grid" id="servicesAdminList">
+              <!-- Los servicios se cargarán aquí -->
             </div>
-            
-            <div class="form-group">
-              <label for="productCategory" class="small required">Categoría</label>
-              <select id="productCategory" required>
-                <option value="">Selecciona una categoría</option>
-                <option value="Esmaltes">Esmaltes</option>
-                <option value="Acrílicos">Acrílicos</option>
-                <option value="Gel">Gel</option>
-                <option value="Herramientas">Herramientas</option>
-                <option value="Cuidado">Cuidado de Piel</option>
-                <option value="Temporada">Temporada</option>
-              </select>
-            </div>
-            
-            <div class="form-group">
-              <label for="productQuantity" class="small required">Cantidad</label>
-              <input type="number" id="productQuantity" min="0" required>
-            </div>
-            
-            <div class="form-group">
-              <label for="productPrice" class="small required">Precio ($)</label>
-              <input type="number" id="productPrice" min="0" step="0.01" required>
-            </div>
-            
-            <div class="form-group">
-              <label for="productDescription" class="small">Descripción</label>
-              <textarea id="productDescription" rows="3"></textarea>
-            </div>
-            
-            <button type="submit" class="btn">Guardar Producto</button>
-            <button type="button" class="btn ghost" onclick="hideInventoryForm()">Cancelar</button>
-          </form>
+          </div>
         </div>
         
         <!-- Gestión de Halloween -->
@@ -762,12 +770,8 @@ th{background:linear-gradient(90deg,var(--lav-3),var(--lav-4));color:#fff}
         
         <div class="card">
           <h2>Servicios Populares</h2>
-          <ul style="padding-left: 20px;">
-            <li>Uñas acrilicas</li>
-            <li>Semipermanente</li>
-            <li>Press on</li>
-            <li>Base ruber</li>
-            <li>Baño en acrilico</li>
+          <ul style="padding-left: 20px;" id="popularServices">
+            <!-- Los servicios populares se cargarán dinámicamente -->
           </ul>
         </div>
       </div>
@@ -781,12 +785,8 @@ th{background:linear-gradient(90deg,var(--lav-3),var(--lav-4));color:#fff}
         
         <div class="card">
           <h2>Servicios Populares</h2>
-          <ul style="padding-left: 20px;">
-            <li>Uñas acrilicas</li>
-            <li>Semipermanente</li>
-            <li>Press on</li>
-            <li>Base ruber</li>
-            <li>Baño en acrilico</li>
+          <ul style="padding-left: 20px;" id="popularServicesOther">
+            <!-- Los servicios populares se cargarán dinámicamente -->
           </ul>
         </div>
       </div>
@@ -851,6 +851,16 @@ th{background:linear-gradient(90deg,var(--lav-3),var(--lav-4));color:#fff}
 </div>
 
 <script>
+// =============================================
+// CONFIGURACIÓN INICIAL Y DATOS
+// =============================================
+
+// Cargar credenciales desde localStorage o usar valores por defecto
+let adminCredentials = JSON.parse(localStorage.getItem('nailBeautyAdminCredentials')) || {
+  username: 'admin',
+  password: 'nailbeauty2023'
+};
+
 // Función para cargar citas desde localStorage
 function loadAppointments() {
   const storedAppointments = localStorage.getItem('nailBeautyAppointments');
@@ -869,11 +879,43 @@ function saveAppointments(appointments) {
 // Inicializar citas
 let appointments = loadAppointments();
 
-let inventory = [
-  { id: 1, name: "Esmalte Rojo Clásico", category: "Esmaltes", quantity: 24, price: 8.50, description: "Esmalte de larga duración color rojo clásico" },
-  { id: 2, name: "Kit Acrílico Profesional", category: "Acrílicos", quantity: 8, price: 45.00, description: "Kit completo para uñas acrílicas" },
-  { id: 3, name: "Gel UV Brillante", category: "Gel", quantity: 15, price: 12.75, description: "Gel para uñas con acabado brillante" },
-  { id: 4, name: "Alicate de Cutículas", category: "Herramientas", quantity: 6, price: 18.00, description: "Alicate profesional para cutículas" }
+// Gestión de servicios
+let services = JSON.parse(localStorage.getItem('nailBeautyServices')) || [
+  {
+    id: 1,
+    name: "Uñas acrílicas",
+    description: "Extensiones artificiales creadas a partir de una mezcla de polímero en polvo y monómero líquido que se adhieren a la uña natural para darles mayor longitud, grosor y resistencia.",
+    price: 100000,
+    images: ['acrilicas 1.jpeg', 'acrilicas 2.jpeg', 'acrilicas 3.jpeg', 'acrilicas 4.jpeg', 'acrilicas 5.jpeg', 'acrilicas 6.jpeg']
+  },
+  {
+    id: 2,
+    name: "Press on",
+    description: "Uñas postizas de alta calidad que se adhieren temporalmente a tus uñas naturales, perfectas para ocasiones especiales o cambio rápido de look.",
+    price: 50000,
+    images: ['Press on 1.jpeg', 'Press on 2.jpeg', 'Press on 3.jpeg', 'Press on 4.jpeg', 'Press on 5.jpeg', 'Press on 6.jpeg']
+  },
+  {
+    id: 3,
+    name: "Baño en acrílico",
+    description: "Técnica que fortalece las uñas naturales aplicando una capa delgada de acrílico para darles mayor resistencia y durabilidad.",
+    price: 80000,
+    images: ['Baño en acrilico 1.jpeg', 'Baño en acrilico 2.jpeg', 'Baño en acrilico 3.jpeg', 'Baño en acrilico 4.jpeg', 'Baño en acrilico 5.jpeg']
+  },
+  {
+    id: 4,
+    name: "Base Rubber",
+    description: "Esmalte de gel que dura hasta 3 semanas con acabado brillante y resistencia superior.",
+    price: 45000,
+    images: ['Base Rubber 1.jpeg', 'Imagen 14.jpeg', 'Imagen 15.jpeg']
+  },
+  {
+    id: 5,
+    name: "Semipermanente",
+    description: "Técnica especializada para cutículas perfectas sin dolor ni cortes.",
+    price: 35000,
+    images: ['Semipermanente 1.jpeg', 'Semipermanente 2.jpeg', 'Semipermanente 3.jpeg', 'Semipermanente 4.jpeg', 'Semipermanente 5.jpeg', 'Semipermanente 6.jpeg']
+  }
 ];
 
 // Gestión de diseños de Halloween
@@ -905,14 +947,14 @@ let halloweenDesigns = JSON.parse(localStorage.getItem('nailBeautyHalloween')) |
     description: "Diseño fantasma rosado.",
     price: 62000,
     image: "Diseño fantasma rosado.jpeg"
-    
   },
-  {id: 5,
+  {
+    id: 5,
     name: "Diseño calavera negra",
     description: "Diseño calavera negra.",
     price: 62000,
     image: "Diseño calaveras.jpeg"
-}
+  }
 ];
 
 // Gestión de galería de imágenes
@@ -940,6 +982,10 @@ let isAdmin = false;
 let currentServiceToBook = "";
 let currentGalleryIndex = 0;
 
+// =============================================
+// FUNCIONES DE NAVEGACIÓN
+// =============================================
+
 // Navegación entre secciones
 function showSection(section) {
   document.querySelectorAll('.main-nav button').forEach(btn => {
@@ -958,22 +1004,24 @@ function showSection(section) {
   
   document.getElementById(section).style.display = 'block';
   
-  // Si estamos en la sección de admin y estamos logueados, actualizar la tabla
+  // Actualizar secciones según sea necesario
   if (section === 'admin' && isAdmin) {
     updateAppointmentsTable();
-    updateInventoryTable();
+    updateServicesAdminList();
     updateHalloweenDesignsList();
     updateGalleryAdminList();
   }
   
-  // Si estamos en la sección de Halloween, actualizar los diseños
   if (section === 'seasonal') {
     updateHalloweenSection();
   }
   
-  // Si estamos en la sección de galería, actualizar las imágenes
   if (section === 'gallery') {
     updateGallerySection();
+  }
+  
+  if (section === 'services') {
+    updateServicesSection();
   }
   
   // Manejar la visibilidad de las sidebars
@@ -986,11 +1034,139 @@ function showSection(section) {
   }
 }
 
-// Gestión de servicios - FUNCIÓN MODIFICADA PARA MÚLTIPLES IMÁGENES
+// =============================================
+// GESTIÓN DE SERVICIOS
+// =============================================
+
+// Actualizar sección de servicios
+function updateServicesSection() {
+  const servicesGrid = document.getElementById('servicesGrid');
+  if (servicesGrid) {
+    servicesGrid.innerHTML = '';
+    
+    services.forEach(service => {
+      const button = document.createElement('button');
+      button.className = 'service-btn';
+      button.textContent = service.name;
+      button.onclick = () => openServiceModal(service.name, service.description, service.price, service.images);
+      servicesGrid.appendChild(button);
+    });
+  }
+}
+
+// Actualizar lista de servicios en admin
+function updateServicesAdminList() {
+  const servicesList = document.getElementById('servicesAdminList');
+  if (servicesList) {
+    servicesList.innerHTML = '';
+    
+    services.forEach(service => {
+      servicesList.innerHTML += `
+        <div class="service-admin-item">
+          <img src="${service.images[0]}" alt="${service.name}">
+          <div class="service-admin-info">
+            <h4>${service.name}</h4>
+            <p>$${service.price.toLocaleString()}</p>
+            <p>${service.description.substring(0, 100)}...</p>
+          </div>
+          <div class="service-admin-actions">
+            <button class="small-btn btn-danger" onclick="deleteService(${service.id})">Eliminar</button>
+          </div>
+        </div>
+      `;
+    });
+  }
+}
+
+// Guardar nuevo servicio
+function saveService(event) {
+  event.preventDefault();
+  
+  const name = document.getElementById('serviceName').value;
+  const description = document.getElementById('serviceDescription').value;
+  const price = parseInt(document.getElementById('servicePrice').value);
+  const imageFiles = document.getElementById('serviceImages').files;
+  
+  if (imageFiles.length === 0) {
+    alert('Por favor selecciona al menos una imagen');
+    return;
+  }
+  
+  // Convertir imágenes a Base64
+  const imagePromises = Array.from(imageFiles).map(file => {
+    return new Promise((resolve) => {
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        resolve(e.target.result);
+      };
+      reader.readAsDataURL(file);
+    });
+  });
+  
+  Promise.all(imagePromises).then(images => {
+    const newService = {
+      id: services.length > 0 ? Math.max(...services.map(s => s.id)) + 1 : 1,
+      name,
+      description,
+      price,
+      images: images
+    };
+    
+    services.push(newService);
+    localStorage.setItem('nailBeautyServices', JSON.stringify(services));
+    
+    updateServicesSection();
+    updateServicesAdminList();
+    updateServiceOptions();
+    updatePopularServices();
+    
+    alert('Servicio guardado exitosamente');
+    document.getElementById('serviceForm').reset();
+    document.getElementById('serviceImagesPreview').innerHTML = '';
+  });
+}
+
+// Previsualizar imágenes de servicio
+function previewServiceImages(event) {
+  const files = event.target.files;
+  const preview = document.getElementById('serviceImagesPreview');
+  preview.innerHTML = '';
+  
+  Array.from(files).forEach(file => {
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      const previewItem = document.createElement('div');
+      previewItem.className = 'preview-item';
+      previewItem.innerHTML = `
+        <img src="${e.target.result}" alt="Preview">
+        <button class="remove" onclick="this.parentElement.remove()">×</button>
+      `;
+      preview.appendChild(previewItem);
+    };
+    reader.readAsDataURL(file);
+  });
+}
+
+// Eliminar servicio
+function deleteService(id) {
+  if (confirm('¿Estás seguro de que quieres eliminar este servicio?')) {
+    services = services.filter(service => service.id !== id);
+    localStorage.setItem('nailBeautyServices', JSON.stringify(services));
+    updateServicesSection();
+    updateServicesAdminList();
+    updateServiceOptions();
+    updatePopularServices();
+  }
+}
+
+// =============================================
+// MODAL DE SERVICIOS
+// =============================================
+
 function openServiceModal(name, description, price, imageUrls) {
   document.getElementById('modalServiceName').textContent = name;
   document.getElementById('modalServiceDescription').textContent = description;
-  document.getElementById('modalServicePrice').textContent = price;
+  document.getElementById('modalServicePrice').textContent = price.toLocaleString();
   
   const galleryThumbs = document.getElementById('serviceGalleryThumbs');
   const mainImage = document.getElementById('modalServiceMainImage');
@@ -1043,19 +1219,212 @@ function bookThisService() {
   document.getElementById('service').value = currentServiceToBook;
 }
 
-// Función para reservar un servicio de temporada
-function bookSeasonalService(serviceName, price) {
-  currentServiceToBook = serviceName;
-  showSection('booking');
-  document.getElementById('service').value = serviceName;
-  
-  // Mostrar un mensaje especial para servicios de temporada
-  setTimeout(() => {
-    alert(`¡Perfecto! Has seleccionado ${serviceName}. Recuerda que este diseño especial de Halloween solo está disponible durante octubre.`);
-  }, 500);
+// =============================================
+// GESTIÓN DE HALLOWEEN
+// =============================================
+
+function updateHalloweenSection() {
+  const seasonalGrid = document.getElementById('seasonalDesignsGrid');
+  if (seasonalGrid) {
+    seasonalGrid.innerHTML = '';
+    
+    halloweenDesigns.forEach(design => {
+      seasonalGrid.innerHTML += `
+        <div class="seasonal-card">
+          <div class="seasonal-image">
+            <img src="${design.image}" alt="${design.name}">
+          </div>
+          <h3>${design.name}</h3>
+          <p>${design.description}</p>
+          <p class="price">$${design.price.toLocaleString()}</p>
+          <button class="btn" onclick="bookSeasonalService('${design.name}', ${design.price})">Reservar</button>
+        </div>
+      `;
+    });
+  }
 }
 
-// Gestión de galería
+function updateHalloweenDesignsList() {
+  const designsList = document.getElementById('halloweenDesignsList');
+  if (designsList) {
+    designsList.innerHTML = '';
+    
+    halloweenDesigns.forEach(design => {
+      designsList.innerHTML += `
+        <div class="halloween-design-item">
+          <img src="${design.image}" alt="${design.name}">
+          <div class="halloween-design-info">
+            <h4>${design.name}</h4>
+            <p>$${design.price.toLocaleString()}</p>
+          </div>
+          <div class="halloween-design-actions">
+            <button class="small-btn btn-danger" onclick="deleteHalloweenDesign(${design.id})">Eliminar</button>
+          </div>
+        </div>
+      `;
+    });
+  }
+}
+
+function saveHalloweenDesign(event) {
+  event.preventDefault();
+  
+  const name = document.getElementById('designName').value;
+  const description = document.getElementById('designDescription').value;
+  const price = parseInt(document.getElementById('designPrice').value);
+  const imageFile = document.getElementById('designImage').files[0];
+  
+  if (!imageFile) {
+    alert('Por favor selecciona una imagen');
+    return;
+  }
+  
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    const newDesign = {
+      id: halloweenDesigns.length > 0 ? Math.max(...halloweenDesigns.map(d => d.id)) + 1 : 1,
+      name,
+      description,
+      price,
+      image: e.target.result
+    };
+    
+    halloweenDesigns.push(newDesign);
+    localStorage.setItem('nailBeautyHalloween', JSON.stringify(halloweenDesigns));
+    updateHalloweenSection();
+    updateHalloweenDesignsList();
+    updateServiceOptions();
+    alert('Diseño guardado exitosamente');
+    document.getElementById('halloweenForm').reset();
+    document.getElementById('designImagePreview').innerHTML = '';
+  };
+  
+  reader.readAsDataURL(imageFile);
+}
+
+function previewDesignImage(event) {
+  const file = event.target.files[0];
+  if (file) {
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      document.getElementById('designImagePreview').innerHTML = 
+        `<img src="${e.target.result}" style="max-width: 200px; border-radius: 8px;">`;
+    };
+    reader.readAsDataURL(file);
+  }
+}
+
+function deleteHalloweenDesign(id) {
+  if (confirm('¿Estás seguro de que quieres eliminar este diseño?')) {
+    halloweenDesigns = halloweenDesigns.filter(design => design.id !== id);
+    localStorage.setItem('nailBeautyHalloween', JSON.stringify(halloweenDesigns));
+    updateHalloweenSection();
+    updateHalloweenDesignsList();
+    updateServiceOptions();
+  }
+}
+
+// =============================================
+// GESTIÓN DE GALERÍA
+// =============================================
+
+function updateGallerySection() {
+  const galleryGrid = document.getElementById('galleryGrid');
+  if (galleryGrid) {
+    galleryGrid.innerHTML = '';
+    
+    galleryImages.forEach((image, index) => {
+      galleryGrid.innerHTML += `
+        <div class="gal-card">
+          <img src="${image.image}" alt="${image.title}" onclick="openGallery(${index})">
+        </div>
+      `;
+    });
+  }
+}
+
+function updateGalleryAdminList() {
+  const galleryList = document.getElementById('galleryAdminList');
+  if (galleryList) {
+    galleryList.innerHTML = '';
+    
+    galleryImages.forEach(image => {
+      galleryList.innerHTML += `
+        <div class="gallery-admin-item">
+          <img src="${image.image}" alt="${image.title}">
+          <div class="gallery-admin-info">
+            <h4>${image.title}</h4>
+            <p>${image.category}</p>
+          </div>
+          <div class="gallery-admin-actions">
+            <button class="small-btn btn-danger" onclick="deleteGalleryImage(${image.id})">Eliminar</button>
+          </div>
+        </div>
+      `;
+    });
+  }
+}
+
+function saveGalleryImage(event) {
+  event.preventDefault();
+  
+  const title = document.getElementById('galleryImageTitle').value;
+  const description = document.getElementById('galleryImageDescription').value;
+  const category = document.getElementById('galleryImageCategory').value;
+  const imageFile = document.getElementById('galleryImageFile').files[0];
+  
+  if (!imageFile) {
+    alert('Por favor selecciona una imagen');
+    return;
+  }
+  
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    const newImage = {
+      id: galleryImages.length > 0 ? Math.max(...galleryImages.map(img => img.id)) + 1 : 1,
+      title,
+      description,
+      category,
+      image: e.target.result
+    };
+    
+    galleryImages.push(newImage);
+    localStorage.setItem('nailBeautyGallery', JSON.stringify(galleryImages));
+    updateGallerySection();
+    updateGalleryAdminList();
+    alert('Imagen guardada exitosamente en la galería');
+    document.getElementById('galleryForm').reset();
+    document.getElementById('galleryImagePreview').innerHTML = '';
+  };
+  
+  reader.readAsDataURL(imageFile);
+}
+
+function previewGalleryImage(event) {
+  const file = event.target.files[0];
+  if (file) {
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      document.getElementById('galleryImagePreview').innerHTML = 
+        `<img src="${e.target.result}" style="max-width: 200px; border-radius: 8px;">`;
+    };
+    reader.readAsDataURL(file);
+  }
+}
+
+function deleteGalleryImage(id) {
+  if (confirm('¿Estás seguro de que quieres eliminar esta imagen de la galería?')) {
+    galleryImages = galleryImages.filter(image => image.id !== id);
+    localStorage.setItem('nailBeautyGallery', JSON.stringify(galleryImages));
+    updateGallerySection();
+    updateGalleryAdminList();
+  }
+}
+
+// =============================================
+// GESTIÓN DE GALERÍA (VISUALIZACIÓN)
+// =============================================
+
 function openGallery(index) {
   currentGalleryIndex = index;
   document.getElementById('galleryImg').src = galleryImages[index].image;
@@ -1078,7 +1447,11 @@ function changeGalleryImage(direction) {
   document.getElementById('galleryImg').src = galleryImages[currentGalleryIndex].image;
 }
 
-// VALIDACIONES DE CAMPOS
+// =============================================
+// RESERVAS Y CITAS
+// =============================================
+
+// Validaciones de campos
 function validateName(input) {
   const nameRegex = /^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$/;
   const errorElement = document.getElementById('nameError');
@@ -1122,7 +1495,6 @@ function validatePhone(input) {
 function submitBooking(event) {
   event.preventDefault();
   
-  // Validación básica
   const name = document.getElementById('name');
   const email = document.getElementById('email');
   const phone = document.getElementById('phone');
@@ -1137,7 +1509,7 @@ function submitBooking(event) {
     el.textContent = '';
   });
   
-  // Validar campos con las nuevas validaciones
+  // Validar campos
   if (!name.value.trim() || !validateName(name)) {
     document.getElementById('nameError').textContent = 'El nombre es obligatorio y solo puede contener letras';
     isValid = false;
@@ -1169,10 +1541,8 @@ function submitBooking(event) {
   }
   
   if (isValid) {
-    // Generar ID único para la cita
     const newId = appointments.length > 0 ? Math.max(...appointments.map(a => a.id)) + 1 : 1;
     
-    // Agregar la cita a la lista
     const newAppointment = {
       id: newId,
       client: name.value,
@@ -1187,11 +1557,8 @@ function submitBooking(event) {
     };
     
     appointments.push(newAppointment);
-    
-    // Guardar en localStorage
     saveAppointments(appointments);
     
-    // Si el admin está logueados, actualizar la tabla
     if (isAdmin) {
       updateAppointmentsTable();
     }
@@ -1213,7 +1580,6 @@ function checkAppointment(event) {
     return;
   }
   
-  // Buscar citas con este email
   const userAppointments = appointments.filter(apt => apt.email === email);
   
   if (userAppointments.length === 0) {
@@ -1244,7 +1610,44 @@ function isValidEmail(email) {
   return re.test(email);
 }
 
-// Gestión de administrador
+// Función para reservar servicio de temporada
+function bookSeasonalService(serviceName, price) {
+  currentServiceToBook = serviceName;
+  showSection('booking');
+  document.getElementById('service').value = serviceName;
+  
+  setTimeout(() => {
+    alert(`¡Perfecto! Has seleccionado ${serviceName}. Recuerda que este diseño especial de Halloween solo está disponible durante octubre.`);
+  }, 500);
+}
+
+// =============================================
+// ADMINISTRACIÓN
+// =============================================
+
+// Gestión de credenciales
+function updateCredentials(event) {
+  event.preventDefault();
+  
+  const newUsername = document.getElementById('newUsername').value;
+  const newPassword = document.getElementById('newPassword').value;
+  const confirmPassword = document.getElementById('confirmPassword').value;
+  
+  if (newPassword !== confirmPassword) {
+    alert('Las contraseñas no coinciden');
+    return;
+  }
+  
+  adminCredentials.username = newUsername;
+  adminCredentials.password = newPassword;
+  
+  localStorage.setItem('nailBeautyAdminCredentials', JSON.stringify(adminCredentials));
+  
+  alert('Credenciales actualizadas correctamente');
+  document.getElementById('credentialsForm').reset();
+}
+
+// Login de administrador
 function openAdminLogin() {
   document.getElementById('adminLogin').style.display = 'flex';
 }
@@ -1261,15 +1664,14 @@ function adminLogin(event) {
   const username = document.getElementById('adminUsername').value;
   const password = document.getElementById('adminPassword').value;
   
-  // Credenciales de administrador
-  if (username === 'admin' && password === 'nailbeauty2023') {
+  if (username === adminCredentials.username && password === adminCredentials.password) {
     isAdmin = true;
     document.getElementById('adminTab').style.display = 'block';
     document.getElementById('admin').classList.remove('admin-panel');
     closeAdminLogin();
     showSection('admin');
     updateAppointmentsTable();
-    updateInventoryTable();
+    updateServicesAdminList();
     updateHalloweenDesignsList();
     updateGalleryAdminList();
   } else {
@@ -1277,12 +1679,11 @@ function adminLogin(event) {
   }
 }
 
-// Actualizar tabla de citas
+// Gestión de citas en admin
 function updateAppointmentsTable() {
   const tbody = document.querySelector('#appointmentsTable tbody');
   tbody.innerHTML = '';
   
-  // Ordenar citas por fecha y hora (más recientes primero)
   const sortedAppointments = [...appointments].sort((a, b) => {
     const dateA = new Date(`${a.date}T${a.time}`);
     const dateB = new Date(`${b.date}T${b.time}`);
@@ -1292,75 +1693,20 @@ function updateAppointmentsTable() {
   sortedAppointments.forEach(appointment => {
     const row = document.createElement('tr');
     
-    // Cliente
-    const clientCell = document.createElement('td');
-    clientCell.textContent = appointment.client;
-    
-    // Email
-    const emailCell = document.createElement('td');
-    emailCell.textContent = appointment.email;
-    
-    // Servicio
-    const serviceCell = document.createElement('td');
-    serviceCell.textContent = appointment.service;
-    
-    // Fecha
-    const dateCell = document.createElement('td');
-    dateCell.textContent = formatDate(appointment.date);
-    
-    // Hora
-    const timeCell = document.createElement('td');
-    timeCell.textContent = appointment.time;
-    
-    // Estado
-    const statusCell = document.createElement('td');
-    const statusBadge = document.createElement('span');
-    statusBadge.className = `status-badge status-${appointment.status}`;
-    statusBadge.textContent = getStatusText(appointment.status);
-    statusCell.appendChild(statusBadge);
-    
-    // Acciones
-    const actionsCell = document.createElement('td');
-    
-    const confirmBtn = document.createElement('button');
-    confirmBtn.className = 'small-btn btn-success';
-    confirmBtn.textContent = 'Confirmar';
-    confirmBtn.onclick = () => changeAppointmentStatus(appointment.id, 'confirmed');
-    
-    const completeBtn = document.createElement('button');
-    completeBtn.className = 'small-btn btn-success';
-    completeBtn.textContent = 'Completar';
-    completeBtn.onclick = () => changeAppointmentStatus(appointment.id, 'completed');
-    
-    const cancelBtn = document.createElement('button');
-    cancelBtn.className = 'small-btn btn-danger';
-    cancelBtn.textContent = 'Cancelar';
-    cancelBtn.onclick = () => changeAppointmentStatus(appointment.id, 'cancelled');
-    
-    const deleteBtn = document.createElement('button');
-    deleteBtn.className = 'small-btn btn-danger';
-    deleteBtn.textContent = 'Eliminar';
-    deleteBtn.onclick = () => deleteAppointment(appointment.id);
-    
-    // Mostrar botones según el estado
-    if (appointment.status === 'pending') {
-      actionsCell.appendChild(confirmBtn);
-      actionsCell.appendChild(cancelBtn);
-    } else if (appointment.status === 'confirmed') {
-      actionsCell.appendChild(completeBtn);
-      actionsCell.appendChild(cancelBtn);
-    }
-    
-    // Siempre mostrar botón de eliminar
-    actionsCell.appendChild(deleteBtn);
-    
-    row.appendChild(clientCell);
-    row.appendChild(emailCell);
-    row.appendChild(serviceCell);
-    row.appendChild(dateCell);
-    row.appendChild(timeCell);
-    row.appendChild(statusCell);
-    row.appendChild(actionsCell);
+    row.innerHTML = `
+      <td>${appointment.client}</td>
+      <td>${appointment.email}</td>
+      <td>${appointment.service}</td>
+      <td>${formatDate(appointment.date)}</td>
+      <td>${appointment.time}</td>
+      <td><span class="status-badge status-${appointment.status}">${getStatusText(appointment.status)}</span></td>
+      <td>
+        <button class="small-btn btn-success" onclick="changeAppointmentStatus(${appointment.id}, 'confirmed')">Confirmar</button>
+        <button class="small-btn btn-success" onclick="changeAppointmentStatus(${appointment.id}, 'completed')">Completar</button>
+        <button class="small-btn btn-danger" onclick="changeAppointmentStatus(${appointment.id}, 'cancelled')">Cancelar</button>
+        <button class="small-btn btn-danger" onclick="deleteAppointment(${appointment.id})">Eliminar</button>
+      </td>
+    `;
     
     tbody.appendChild(row);
   });
@@ -1386,7 +1732,7 @@ function changeAppointmentStatus(id, newStatus) {
   const appointment = appointments.find(a => a.id === id);
   if (appointment) {
     appointment.status = newStatus;
-    saveAppointments(appointments); // Guardar cambios en localStorage
+    saveAppointments(appointments);
     updateAppointmentsTable();
   }
 }
@@ -1394,345 +1740,29 @@ function changeAppointmentStatus(id, newStatus) {
 function deleteAppointment(id) {
   if (confirm('¿Estás seguro de que quieres eliminar esta cita?')) {
     appointments = appointments.filter(a => a.id !== id);
-    saveAppointments(appointments); // Guardar cambios en localStorage
+    saveAppointments(appointments);
     updateAppointmentsTable();
   }
 }
 
-// Gestión de inventario
-function updateInventoryTable() {
-  const tbody = document.querySelector('#inventoryTable tbody');
-  tbody.innerHTML = '';
-  
-  inventory.forEach(product => {
-    const row = document.createElement('tr');
-    
-    // Nombre
-    const nameCell = document.createElement('td');
-    nameCell.textContent = product.name;
-    
-    // Categoría
-    const categoryCell = document.createElement('td');
-    categoryCell.textContent = product.category;
-    
-    // Cantidad
-    const quantityCell = document.createElement('td');
-    quantityCell.textContent = product.quantity;
-    
-    // Precio
-    const priceCell = document.createElement('td');
-    priceCell.textContent = `$${product.price.toFixed(2)}`;
-    
-    // Acciones
-    const actionsCell = document.createElement('td');
-    
-    const editBtn = document.createElement('button');
-    editBtn.className = 'small-btn';
-    editBtn.textContent = 'Editar';
-    editBtn.onclick = () => editProduct(product.id);
-    
-    const deleteBtn = document.createElement('button');
-    deleteBtn.className = 'small-btn btn-danger';
-    deleteBtn.textContent = 'Eliminar';
-    deleteBtn.onclick = () => deleteProduct(product.id);
-    
-    actionsCell.appendChild(editBtn);
-    actionsCell.appendChild(deleteBtn);
-    
-    row.appendChild(nameCell);
-    row.appendChild(categoryCell);
-    row.appendChild(quantityCell);
-    row.appendChild(priceCell);
-    row.appendChild(actionsCell);
-    
-    tbody.appendChild(row);
-  });
-}
+// =============================================
+// FUNCIONES UTILITARIAS
+// =============================================
 
-function showInventoryForm() {
-  document.getElementById('inventoryForm').style.display = 'block';
-  document.getElementById('inventoryFormTitle').textContent = 'Agregar Producto';
-  document.getElementById('productForm').reset();
-  document.getElementById('productId').value = '';
-}
-
-function hideInventoryForm() {
-  document.getElementById('inventoryForm').style.display = 'none';
-}
-
-function editProduct(id) {
-  const product = inventory.find(p => p.id === id);
-  if (product) {
-    document.getElementById('inventoryForm').style.display = 'block';
-    document.getElementById('inventoryFormTitle').textContent = 'Editar Producto';
-    
-    document.getElementById('productId').value = product.id;
-    document.getElementById('productName').value = product.name;
-    document.getElementById('productCategory').value = product.category;
-    document.getElementById('productQuantity').value = product.quantity;
-    document.getElementById('productPrice').value = product.price;
-    document.getElementById('productDescription').value = product.description || '';
-  }
-}
-
-function saveProduct(event) {
-  event.preventDefault();
-  
-  const id = document.getElementById('productId').value;
-  const name = document.getElementById('productName').value;
-  const category = document.getElementById('productCategory').value;
-  const quantity = parseInt(document.getElementById('productQuantity').value);
-  const price = parseFloat(document.getElementById('productPrice').value);
-  const description = document.getElementById('productDescription').value;
-  
-  if (id) {
-    // Editar producto existente
-    const productIndex = inventory.findIndex(p => p.id === parseInt(id));
-    if (productIndex !== -1) {
-      inventory[productIndex] = {
-        ...inventory[productIndex],
-        name,
-        category,
-        quantity,
-        price,
-        description
-      };
-    }
-  } else {
-    // Agregar nuevo producto
-    const newProduct = {
-      id: inventory.length > 0 ? Math.max(...inventory.map(p => p.id)) + 1 : 1,
-      name,
-      category,
-      quantity,
-      price,
-      description
-    };
-    
-    inventory.push(newProduct);
-  }
-  
-  updateInventoryTable();
-  hideInventoryForm();
-  alert('Producto guardado exitosamente');
-}
-
-function deleteProduct(id) {
-  if (confirm('¿Estás seguro de que quieres eliminar este producto?')) {
-    inventory = inventory.filter(p => p.id !== id);
-    updateInventoryTable();
-  }
-}
-
-// Gestión de diseños de Halloween
-function saveHalloweenDesign(event) {
-  event.preventDefault();
-  
-  const name = document.getElementById('designName').value;
-  const description = document.getElementById('designDescription').value;
-  const price = parseInt(document.getElementById('designPrice').value);
-  const imageFile = document.getElementById('designImage').files[0];
-  
-  if (!imageFile) {
-    alert('Por favor selecciona una imagen');
-    return;
-  }
-  
-  // Convertir imagen a Base64
-  const reader = new FileReader();
-  reader.onload = function(e) {
-    const newDesign = {
-      id: halloweenDesigns.length > 0 ? Math.max(...halloweenDesigns.map(d => d.id)) + 1 : 1,
-      name,
-      description,
-      price,
-      image: e.target.result // Guardar como Base64
-    };
-    
-    halloweenDesigns.push(newDesign);
-    localStorage.setItem('nailBeautyHalloween', JSON.stringify(halloweenDesigns));
-    updateHalloweenSection();
-    updateHalloweenDesignsList();
-    updateServiceOptions();
-    alert('Diseño guardado exitosamente');
-    document.getElementById('halloweenForm').reset();
-    document.getElementById('designImagePreview').innerHTML = '';
-  };
-  
-  reader.readAsDataURL(imageFile);
-}
-
-function previewDesignImage(event) {
-  const file = event.target.files[0];
-  if (file) {
-    const reader = new FileReader();
-    reader.onload = function(e) {
-      document.getElementById('designImagePreview').innerHTML = 
-        `<img src="${e.target.result}" style="max-width: 200px; border-radius: 8px;">`;
-    };
-    reader.readAsDataURL(file);
-  }
-}
-
-function updateHalloweenSection() {
-  // Actualizar la sección de temporada con los diseños guardados
-  const seasonalGrid = document.getElementById('seasonalDesignsGrid');
-  if (seasonalGrid) {
-    seasonalGrid.innerHTML = '';
-    
-    halloweenDesigns.forEach(design => {
-      seasonalGrid.innerHTML += `
-        <div class="seasonal-card">
-          <div class="seasonal-image">
-            <img src="${design.image}" alt="${design.name}">
-          </div>
-          <h3>${design.name}</h3>
-          <p>${design.description}</p>
-          <p class="price">$${design.price.toLocaleString()}</p>
-          <button class="btn" onclick="bookSeasonalService('${design.name}', ${design.price})">Reservar</button>
-        </div>
-      `;
-    });
-  }
-}
-
-function updateHalloweenDesignsList() {
-  const designsList = document.getElementById('halloweenDesignsList');
-  if (designsList) {
-    designsList.innerHTML = '';
-    
-    halloweenDesigns.forEach(design => {
-      designsList.innerHTML += `
-        <div class="halloween-design-item">
-          <img src="${design.image}" alt="${design.name}">
-          <div class="halloween-design-info">
-            <h4>${design.name}</h4>
-            <p>$${design.price.toLocaleString()}</p>
-          </div>
-          <div class="halloween-design-actions">
-            <button class="small-btn btn-danger" onclick="deleteHalloweenDesign(${design.id})">Eliminar</button>
-          </div>
-        </div>
-      `;
-    });
-  }
-}
-
-function deleteHalloweenDesign(id) {
-  if (confirm('¿Estás seguro de que quieres eliminar este diseño?')) {
-    halloweenDesigns = halloweenDesigns.filter(design => design.id !== id);
-    localStorage.setItem('nailBeautyHalloween', JSON.stringify(halloweenDesigns));
-    updateHalloweenSection();
-    updateHalloweenDesignsList();
-    updateServiceOptions();
-  }
-}
-
-// Gestión de galería
-function saveGalleryImage(event) {
-  event.preventDefault();
-  
-  const title = document.getElementById('galleryImageTitle').value;
-  const description = document.getElementById('galleryImageDescription').value;
-  const category = document.getElementById('galleryImageCategory').value;
-  const imageFile = document.getElementById('galleryImageFile').files[0];
-  
-  if (!imageFile) {
-    alert('Por favor selecciona una imagen');
-    return;
-  }
-  
-  // Convertir imagen a Base64
-  const reader = new FileReader();
-  reader.onload = function(e) {
-    const newImage = {
-      id: galleryImages.length > 0 ? Math.max(...galleryImages.map(img => img.id)) + 1 : 1,
-      title,
-      description,
-      category,
-      image: e.target.result // Guardar como Base64
-    };
-    
-    galleryImages.push(newImage);
-    localStorage.setItem('nailBeautyGallery', JSON.stringify(galleryImages));
-    updateGallerySection();
-    updateGalleryAdminList();
-    alert('Imagen guardada exitosamente en la galería');
-    document.getElementById('galleryForm').reset();
-    document.getElementById('galleryImagePreview').innerHTML = '';
-  };
-  
-  reader.readAsDataURL(imageFile);
-}
-
-function previewGalleryImage(event) {
-  const file = event.target.files[0];
-  if (file) {
-    const reader = new FileReader();
-    reader.onload = function(e) {
-      document.getElementById('galleryImagePreview').innerHTML = 
-        `<img src="${e.target.result}" style="max-width: 200px; border-radius: 8px;">`;
-    };
-    reader.readAsDataURL(file);
-  }
-}
-
-function updateGallerySection() {
-  // Actualizar la sección de galería con las imágenes guardadas
-  const galleryGrid = document.getElementById('galleryGrid');
-  if (galleryGrid) {
-    galleryGrid.innerHTML = '';
-    
-    galleryImages.forEach((image, index) => {
-      galleryGrid.innerHTML += `
-        <div class="gal-card">
-          <img src="${image.image}" alt="${image.title}" onclick="openGallery(${index})">
-        </div>
-      `;
-    });
-  }
-}
-
-function updateGalleryAdminList() {
-  const galleryList = document.getElementById('galleryAdminList');
-  if (galleryList) {
-    galleryList.innerHTML = '';
-    
-    galleryImages.forEach(image => {
-      galleryList.innerHTML += `
-        <div class="gallery-admin-item">
-          <img src="${image.image}" alt="${image.title}">
-          <div class="gallery-admin-info">
-            <h4>${image.title}</h4>
-            <p>${image.category}</p>
-          </div>
-          <div class="gallery-admin-actions">
-            <button class="small-btn btn-danger" onclick="deleteGalleryImage(${image.id})">Eliminar</button>
-          </div>
-        </div>
-      `;
-    });
-  }
-}
-
-function deleteGalleryImage(id) {
-  if (confirm('¿Estás seguro de que quieres eliminar esta imagen de la galería?')) {
-    galleryImages = galleryImages.filter(image => image.id !== id);
-    localStorage.setItem('nailBeautyGallery', JSON.stringify(galleryImages));
-    updateGallerySection();
-    updateGalleryAdminList();
-  }
-}
-
+// Actualizar opciones de servicios en formulario
 function updateServiceOptions() {
   const serviceSelect = document.getElementById('service');
-  // Eliminar opciones anteriores de Halloween
-  const halloweenOptions = Array.from(serviceSelect.options).filter(option => 
-    option.value.includes('Halloween')
-  );
-  halloweenOptions.forEach(option => option.remove());
+  serviceSelect.innerHTML = '<option value="">Selecciona un servicio</option>';
   
-  // Agregar nuevas opciones de Halloween
+  // Agregar servicios regulares
+  services.forEach(service => {
+    const option = document.createElement('option');
+    option.value = service.name;
+    option.textContent = service.name;
+    serviceSelect.appendChild(option);
+  });
+  
+  // Agregar diseños de Halloween
   halloweenDesigns.forEach(design => {
     const option = document.createElement('option');
     option.value = design.name;
@@ -1741,16 +1771,43 @@ function updateServiceOptions() {
   });
 }
 
-// Inicialización
+// Actualizar servicios populares en sidebar
+function updatePopularServices() {
+  const popularServices = document.getElementById('popularServices');
+  const popularServicesOther = document.getElementById('popularServicesOther');
+  
+  if (popularServices && popularServicesOther) {
+    popularServices.innerHTML = '';
+    popularServicesOther.innerHTML = '';
+    
+    // Mostrar primeros 5 servicios como populares
+    services.slice(0, 5).forEach(service => {
+      const li = document.createElement('li');
+      li.textContent = service.name;
+      popularServices.appendChild(li);
+      popularServicesOther.appendChild(li.cloneNode(true));
+    });
+  }
+}
+
+// =============================================
+// INICIALIZACIÓN
+// =============================================
+
 document.addEventListener('DOMContentLoaded', function() {
   // Mostrar la sección de inicio por defecto
   showSection('home');
   
-  // Actualizar las opciones de servicios con los diseños de Halloween
-  updateServiceOptions();
-  
-  // Actualizar la galería
+  // Actualizar todas las secciones
+  updateServicesSection();
+  updateHalloweenSection();
   updateGallerySection();
+  updateServiceOptions();
+  updatePopularServices();
+  
+  // Configurar fecha mínima para reservas (hoy)
+  const today = new Date().toISOString().split('T')[0];
+  document.getElementById('date').min = today;
 });
 </script>
 </body>
