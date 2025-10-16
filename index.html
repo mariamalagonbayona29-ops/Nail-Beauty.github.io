@@ -254,6 +254,43 @@ th{background:linear-gradient(90deg,var(--lav-3),var(--lav-4));color:#fff}
   padding: 10px;
   background: var(--lav-1);
 }
+
+/* Gallery Admin Styles */
+.gallery-admin-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 15px;
+  margin-top: 15px;
+}
+
+.gallery-admin-item {
+  border: 1px solid var(--lav-2);
+  border-radius: 8px;
+  overflow: hidden;
+  position: relative;
+}
+
+.gallery-admin-item img {
+  width: 100%;
+  height: 120px;
+  object-fit: cover;
+}
+
+.gallery-admin-info {
+  padding: 10px;
+}
+
+.gallery-admin-info h4 {
+  margin: 0 0 5px;
+  font-size: 0.9rem;
+}
+
+.gallery-admin-actions {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  background: var(--lav-1);
+}
 </style>
 </head>
 <body>
@@ -380,24 +417,8 @@ th{background:linear-gradient(90deg,var(--lav-3),var(--lav-4));color:#fff}
       <div id="gallery" class="card" style="display:none">
         <h2>Galería de Trabajos</h2>
         <p>Explora algunos de nuestros trabajos más recientes y encuentra inspiración para tu próximo diseño.</p>
-        <div class="gal-grid">
-          <div class="gal-card"><img src="Acrilicas 1.jpeg" alt="Trabajo de uñas 1" onclick="openGallery(0)"></div>
-          <div class="gal-card"><img src="Acrilicas 2.jpeg" alt="Trabajo de uñas 2" onclick="openGallery(1)"></div>
-          <div class="gal-card"><img src="Acrilicas 3.jpeg" alt="Trabajo de uñas 3" onclick="openGallery(2)"></div>
-          <div class="gal-card"><img src="Acrilicas 4.jpeg" alt="Trabajo de uñas 4" onclick="openGallery(3)"></div>
-          <div class="gal-card"><img src="Acrilicas 5.jpeg" alt="Trabajo de uñas 5" onclick="openGallery(4)"></div>
-          <div class="gal-card"><img src="Acrilicas 6.jpeg" alt="Trabajo de uñas 6" onclick="openGallery(5)"></div>
-          <div class="gal-card"><img src="Press on 1.jpeg" alt="Trabajo de uñas 7" onclick="openGallery(6)"></div> 
-          <div class="gal-card"><img src="Press on 2.jpeg" alt="Trabajo de uñas 8" onclick="openGallery(7)"></div>
-          <div class="gal-card"><img src="Press on 3.jpeg" alt="Trabajo de uñas 9" onclick="openGallery(8)"></div>
-          <div class="gal-card"><img src="Press on 4.jpeg" alt="Trabajo de uñas 10" onclick="openGallery(9)"></div>
-          <div class="gal-card"><img src="Press on 5.jpeg" alt="Trabajo de uñas 11" onclick="openGallery(10)"></div>
-          <div class="gal-card"><img src="Baño en acrilico 1.jpeg" alt="Trabajo de uñas 12" onclick="openGallery(11)"></div>
-          <div class="gal-card"><img src="Baño en acrilico 2.jpeg" alt="Trabajo de uñas 13" onclick="openGallery(12)"></div>
-          <div class="gal-card"><img src="Baño en acrilico 3.jpeg" alt="Trabajo de uñas 14" onclick="openGallery(13)"></div>
-          <div class="gal-card"><img src="Baño en acrilico 4.jpeg" alt="Trabajo de uñas 15" onclick="openGallery(14)"></div>
-          <div class="gal-card"><img src="Baño en acrilico 5.jpeg" alt="Trabajo de uñas 16" onclick="openGallery(15)"></div>
-          <div class="gal-card"><img src="Base Rubber 1.jpeg" alt="Trabajo de uñas 17" onclick="openGallery(15)"></div>
+        <div class="gal-grid" id="galleryGrid">
+          <!-- Las imágenes de la galería se cargarán dinámicamente -->
         </div>
       </div>
       
@@ -615,6 +636,60 @@ th{background:linear-gradient(90deg,var(--lav-3),var(--lav-4));color:#fff}
             <h4>Diseños Existentes</h4>
             <div class="halloween-designs-grid" id="halloweenDesignsList">
               <!-- Los diseños se cargarán aquí -->
+            </div>
+          </div>
+        </div>
+        
+        <!-- Gestión de Galería -->
+        <div class="panel-block">
+          <h3>Gestión de Galería</h3>
+          
+          <!-- Formulario para agregar imagen a la galería -->
+          <div class="form-group">
+            <h4>Agregar Nueva Imagen a la Galería</h4>
+            <form id="galleryForm" onsubmit="saveGalleryImage(event)">
+              <div class="form-group">
+                <label class="small required">Título de la Imagen</label>
+                <input type="text" id="galleryImageTitle" required>
+              </div>
+              
+              <div class="form-group">
+                <label class="small">Descripción (opcional)</label>
+                <textarea id="galleryImageDescription" rows="2"></textarea>
+              </div>
+              
+              <div class="form-group">
+                <label class="small required">Categoría</label>
+                <select id="galleryImageCategory" required>
+                  <option value="">Selecciona una categoría</option>
+                  <option value="Uñas acrílicas">Uñas acrílicas</option>
+                  <option value="Press on">Press on</option>
+                  <option value="Baño en acrílico">Baño en acrílico</option>
+                  <option value="Base Rubber">Base Rubber</option>
+                  <option value="Semipermanente">Semipermanente</option>
+                  <option value="Halloween">Halloween</option>
+                  <option value="Otros">Otros</option>
+                </select>
+              </div>
+              
+              <div class="form-group">
+                <label class="small required">Imagen</label>
+                <div class="upload-area" onclick="document.getElementById('galleryImageFile').click()">
+                  <p>Haz clic para seleccionar imagen</p>
+                  <input type="file" id="galleryImageFile" accept="image/*" style="display:none" onchange="previewGalleryImage(event)" required>
+                </div>
+                <div id="galleryImagePreview" style="margin-top: 10px;"></div>
+              </div>
+              
+              <button type="submit" class="btn">Guardar Imagen</button>
+            </form>
+          </div>
+          
+          <!-- Lista de imágenes existentes -->
+          <div style="margin-top: 30px;">
+            <h4>Imágenes en Galería</h4>
+            <div class="gallery-admin-grid" id="galleryAdminList">
+              <!-- Las imágenes se cargarán aquí -->
             </div>
           </div>
         </div>
@@ -840,8 +915,30 @@ let halloweenDesigns = JSON.parse(localStorage.getItem('nailBeautyHalloween')) |
 }
 ];
 
+// Gestión de galería de imágenes
+let galleryImages = JSON.parse(localStorage.getItem('nailBeautyGallery')) || [
+  { id: 1, title: "Uñas acrílicas 1", description: "Hermoso diseño en uñas acrílicas", category: "Uñas acrílicas", image: "Acrilicas 1.jpeg" },
+  { id: 2, title: "Uñas acrílicas 2", description: "Diseño elegante en acrílico", category: "Uñas acrílicas", image: "Acrilicas 2.jpeg" },
+  { id: 3, title: "Uñas acrílicas 3", description: "Acrílico con detalles dorados", category: "Uñas acrílicas", image: "Acrilicas 3.jpeg" },
+  { id: 4, title: "Uñas acrílicas 4", description: "Diseño moderno en acrílico", category: "Uñas acrílicas", image: "Acrilicas 4.jpeg" },
+  { id: 5, title: "Uñas acrílicas 5", description: "Acrílico francés con toques de color", category: "Uñas acrílicas", image: "Acrilicas 5.jpeg" },
+  { id: 6, title: "Uñas acrílicas 6", description: "Diseño artístico en acrílico", category: "Uñas acrílicas", image: "Acrilicas 6.jpeg" },
+  { id: 7, title: "Press on 1", description: "Uñas press on elegantes", category: "Press on", image: "Press on 1.jpeg" },
+  { id: 8, title: "Press on 2", description: "Press on con diseño floral", category: "Press on", image: "Press on 2.jpeg" },
+  { id: 9, title: "Press on 3", description: "Press on de colores vibrantes", category: "Press on", image: "Press on 3.jpeg" },
+  { id: 10, title: "Press on 4", description: "Press on con glitter", category: "Press on", image: "Press on 4.jpeg" },
+  { id: 11, title: "Press on 5", description: "Press on diseño francés", category: "Press on", image: "Press on 5.jpeg" },
+  { id: 12, title: "Baño en acrílico 1", description: "Baño en acrílico natural", category: "Baño en acrílico", image: "Baño en acrilico 1.jpeg" },
+  { id: 13, title: "Baño en acrílico 2", description: "Baño en acrílico con diseño", category: "Baño en acrílico", image: "Baño en acrilico 2.jpeg" },
+  { id: 14, title: "Baño en acrílico 3", description: "Baño en acrílico francés", category: "Baño en acrílico", image: "Baño en acrilico 3.jpeg" },
+  { id: 15, title: "Baño en acrílico 4", description: "Baño en acrílico colorido", category: "Baño en acrílico", image: "Baño en acrilico 4.jpeg" },
+  { id: 16, title: "Baño en acrílico 5", description: "Baño en acrílico con detalles", category: "Baño en acrílico", image: "Baño en acrilico 5.jpeg" },
+  { id: 17, title: "Base Rubber", description: "Base rubber de larga duración", category: "Base Rubber", image: "Base Rubber 1.jpeg" }
+];
+
 let isAdmin = false;
 let currentServiceToBook = "";
+let currentGalleryIndex = 0;
 
 // Navegación entre secciones
 function showSection(section) {
@@ -866,11 +963,17 @@ function showSection(section) {
     updateAppointmentsTable();
     updateInventoryTable();
     updateHalloweenDesignsList();
+    updateGalleryAdminList();
   }
   
   // Si estamos en la sección de Halloween, actualizar los diseños
   if (section === 'seasonal') {
     updateHalloweenSection();
+  }
+  
+  // Si estamos en la sección de galería, actualizar las imágenes
+  if (section === 'gallery') {
+    updateGallerySection();
   }
   
   // Manejar la visibilidad de las sidebars
@@ -953,29 +1056,9 @@ function bookSeasonalService(serviceName, price) {
 }
 
 // Gestión de galería
-let currentGalleryIndex = 0;
-const galleryImages = [
-  'Acrilicas 1.jpeg',
-  'Acrilicas 2.jpeg',
-  'Acrilicas 3.jpeg',
-  'Acrilicas 4.jpeg',
-  'Acrilicas 5.jpeg',
-  'Acrilicas 6.jpeg',
-  'Press on 1.jpeg',
-  'Press on 2.jpeg',
-  'Press on 3.jpeg',
-  'Press on 4.jpeg',
-  'Baño en acrilico 1.jpeg',
-  'Baño en acrilico 2.jpeg',
-  'Baño en acrilico 3.jpeg',
-  'Baño en acrilico 4.jpeg',
-  'Baño en acrilico 5.jpeg',
-  '',
-];
-
 function openGallery(index) {
   currentGalleryIndex = index;
-  document.getElementById('galleryImg').src = galleryImages[index];
+  document.getElementById('galleryImg').src = galleryImages[index].image;
   document.getElementById('galleryModal').style.display = 'flex';
 }
 
@@ -992,7 +1075,7 @@ function changeGalleryImage(direction) {
     currentGalleryIndex = galleryImages.length - 1;
   }
   
-  document.getElementById('galleryImg').src = galleryImages[currentGalleryIndex];
+  document.getElementById('galleryImg').src = galleryImages[currentGalleryIndex].image;
 }
 
 // VALIDACIONES DE CAMPOS
@@ -1188,6 +1271,7 @@ function adminLogin(event) {
     updateAppointmentsTable();
     updateInventoryTable();
     updateHalloweenDesignsList();
+    updateGalleryAdminList();
   } else {
     document.getElementById('loginError').textContent = 'Usuario o contraseña incorrectos';
   }
@@ -1544,6 +1628,102 @@ function deleteHalloweenDesign(id) {
   }
 }
 
+// Gestión de galería
+function saveGalleryImage(event) {
+  event.preventDefault();
+  
+  const title = document.getElementById('galleryImageTitle').value;
+  const description = document.getElementById('galleryImageDescription').value;
+  const category = document.getElementById('galleryImageCategory').value;
+  const imageFile = document.getElementById('galleryImageFile').files[0];
+  
+  if (!imageFile) {
+    alert('Por favor selecciona una imagen');
+    return;
+  }
+  
+  // Convertir imagen a Base64
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    const newImage = {
+      id: galleryImages.length > 0 ? Math.max(...galleryImages.map(img => img.id)) + 1 : 1,
+      title,
+      description,
+      category,
+      image: e.target.result // Guardar como Base64
+    };
+    
+    galleryImages.push(newImage);
+    localStorage.setItem('nailBeautyGallery', JSON.stringify(galleryImages));
+    updateGallerySection();
+    updateGalleryAdminList();
+    alert('Imagen guardada exitosamente en la galería');
+    document.getElementById('galleryForm').reset();
+    document.getElementById('galleryImagePreview').innerHTML = '';
+  };
+  
+  reader.readAsDataURL(imageFile);
+}
+
+function previewGalleryImage(event) {
+  const file = event.target.files[0];
+  if (file) {
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      document.getElementById('galleryImagePreview').innerHTML = 
+        `<img src="${e.target.result}" style="max-width: 200px; border-radius: 8px;">`;
+    };
+    reader.readAsDataURL(file);
+  }
+}
+
+function updateGallerySection() {
+  // Actualizar la sección de galería con las imágenes guardadas
+  const galleryGrid = document.getElementById('galleryGrid');
+  if (galleryGrid) {
+    galleryGrid.innerHTML = '';
+    
+    galleryImages.forEach((image, index) => {
+      galleryGrid.innerHTML += `
+        <div class="gal-card">
+          <img src="${image.image}" alt="${image.title}" onclick="openGallery(${index})">
+        </div>
+      `;
+    });
+  }
+}
+
+function updateGalleryAdminList() {
+  const galleryList = document.getElementById('galleryAdminList');
+  if (galleryList) {
+    galleryList.innerHTML = '';
+    
+    galleryImages.forEach(image => {
+      galleryList.innerHTML += `
+        <div class="gallery-admin-item">
+          <img src="${image.image}" alt="${image.title}">
+          <div class="gallery-admin-info">
+            <h4>${image.title}</h4>
+            <p>${image.category}</p>
+          </div>
+          <div class="gallery-admin-actions">
+            <button class="small-btn btn-danger" onclick="deleteGalleryImage(${image.id})">Eliminar</button>
+          </div>
+        </div>
+      `;
+    });
+  }
+}
+
+function deleteGalleryImage(id) {
+  if (confirm('¿Estás seguro de que quieres eliminar esta imagen de la galería?')) {
+    galleryImages = galleryImages.filter(image => image.id !== id);
+    localStorage.setItem('nailBeautyGallery', JSON.stringify(galleryImages));
+    updateGallerySection();
+    updateGalleryAdminList();
+  }
+}
+
 function updateServiceOptions() {
   const serviceSelect = document.getElementById('service');
   // Eliminar opciones anteriores de Halloween
@@ -1568,6 +1748,9 @@ document.addEventListener('DOMContentLoaded', function() {
   
   // Actualizar las opciones de servicios con los diseños de Halloween
   updateServiceOptions();
+  
+  // Actualizar la galería
+  updateGallerySection();
 });
 </script>
 </body>
