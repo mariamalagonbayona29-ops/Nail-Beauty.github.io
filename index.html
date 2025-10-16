@@ -322,7 +322,7 @@ th{background:linear-gradient(90deg,var(--lav-3),var(--lav-4));color:#fff}
             'Uñas acrílicas', 
             'Extensiones artificiales creadas a partir de una mezcla de polímero en polvo y monómero líquido que se adhieren a la uña natural para darles mayor longitud, grosor y resistencia.', 
             100000, 
-            ['Acrilicas 1.jpeg', 'Acrilicas 2.jpeg', 'Acrilicas 3.jpeg', 'Acrilicas 4.jpeg', 'Acrilicas 5.jpeg', 'Acrilicas 6.jpeg' ]
+            ['acrilicas 1.jpeg', 'acrilicas 2.jpeg', 'acrilicas 3.jpeg', 'acrilicas 4.jpeg', 'acrilicas 5.jpeg', 'acrilicas 6.jpeg' ]
           )">Uñas acrílicas</button>
           
           <button class="service-btn" onclick="openServiceModal(
@@ -343,7 +343,7 @@ th{background:linear-gradient(90deg,var(--lav-3),var(--lav-4));color:#fff}
             'Base Rubber', 
             'Esmalte de gel que dura hasta 3 semanas con acabado brillante y resistencia superior.', 
             45000, 
-            ['Base Rubber 1.jpeg', 'Base Rubber 2.jpeg', 'Base Rubber 3.jpeg']
+            ['Base Rubber 1.jpeg', 'Imagen 14.jpeg', 'Imagen 15.jpeg']
           )">Base Rubber</button>
           
           <button class="service-btn" onclick="openServiceModal(
@@ -397,9 +397,7 @@ th{background:linear-gradient(90deg,var(--lav-3),var(--lav-4));color:#fff}
           <div class="gal-card"><img src="Baño en acrilico 3.jpeg" alt="Trabajo de uñas 14" onclick="openGallery(13)"></div>
           <div class="gal-card"><img src="Baño en acrilico 4.jpeg" alt="Trabajo de uñas 15" onclick="openGallery(14)"></div>
           <div class="gal-card"><img src="Baño en acrilico 5.jpeg" alt="Trabajo de uñas 16" onclick="openGallery(15)"></div>
-          <div class="gal-card"><img src="Base Rubber 1.jpeg" alt="Trabajo de uñas 17" onclick="openGallery(16)"></div>
-           <div class="gal-card"><img src="Base Rubber 1.jpeg" alt="Trabajo de uñas 18" onclick="openGallery(17)"></div>
-           <div class="gal-card"><img src="Base Rubber 1.jpeg" alt="Trabajo de uñas 19" onclick="openGallery(18)"></div>
+          <div class="gal-card"><img src="Base Rubber 1.jpeg" alt="Trabajo de uñas 17" onclick="openGallery(15)"></div>
         </div>
       </div>
       
@@ -411,25 +409,19 @@ th{background:linear-gradient(90deg,var(--lav-3),var(--lav-4));color:#fff}
           <form id="bookingForm" onsubmit="submitBooking(event)">
             <div class="form-group">
               <label for="name" class="small required">Nombre completo</label>
-              <input type="text" id="name" name="name" required 
-                     onkeypress="return /[a-zA-ZáéíóúÁÉÍÓÚñÑ ]/.test(event.key)"
-                     oninput="this.value = this.value.replace(/[^a-zA-ZáéíóúÁÉÍÓÚñÑ ]/g,'')">
+              <input type="text" id="name" name="name" required oninput="validateName(this)">
               <div class="error-message" id="nameError"></div>
             </div>
             
             <div class="form-group">
               <label for="email" class="small required">Correo electrónico</label>
-              <input type="email" id="email" name="email" required 
-                     pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$">
+              <input type="email" id="email" name="email" required oninput="validateEmail(this)">
               <div class="error-message" id="emailError"></div>
             </div>
             
             <div class="form-group">
               <label for="phone" class="small required">Teléfono</label>
-              <input type="text" id="phone" name="phone" required 
-                     onkeypress="return /[0-9]/.test(event.key)"
-                     oninput="this.value = this.value.replace(/[^0-9]/g,'')"
-                     maxlength="10">
+              <input type="text" id="phone" name="phone" required oninput="validatePhone(this)">
               <div class="error-message" id="phoneError"></div>
             </div>
             
@@ -546,8 +538,7 @@ th{background:linear-gradient(90deg,var(--lav-3),var(--lav-4));color:#fff}
             
             <div class="form-group">
               <label for="productName" class="small required">Nombre del Producto</label>
-              <input type="text" id="productName" required 
-                     onkeypress="return /[a-zA-ZáéíóúÁÉÍÓÚñÑ0-9 ]/.test(event.key)">
+              <input type="text" id="productName" required>
             </div>
             
             <div class="form-group">
@@ -565,15 +556,12 @@ th{background:linear-gradient(90deg,var(--lav-3),var(--lav-4));color:#fff}
             
             <div class="form-group">
               <label for="productQuantity" class="small required">Cantidad</label>
-              <input type="number" id="productQuantity" min="0" required 
-                     onkeypress="return /[0-9]/.test(event.key)">
+              <input type="number" id="productQuantity" min="0" required>
             </div>
             
             <div class="form-group">
               <label for="productPrice" class="small required">Precio ($)</label>
-              <input type="number" id="productPrice" min="0" step="0.01" required 
-                     onkeypress="return /[0-9.]/.test(event.key)"
-                     oninput="this.value = this.value.replace(/[^0-9.]/g,'')">
+              <input type="number" id="productPrice" min="0" step="0.01" required>
             </div>
             
             <div class="form-group">
@@ -982,9 +970,6 @@ const galleryImages = [
   'Baño en acrilico 3.jpeg',
   'Baño en acrilico 4.jpeg',
   'Baño en acrilico 5.jpeg',
-  'Base Rubber 1.jpeg',
-  'Base Rubber 2.jpeg',
-  'Base Rubber 3.jpeg',
   '',
 ];
 
@@ -1010,6 +995,46 @@ function changeGalleryImage(direction) {
   document.getElementById('galleryImg').src = galleryImages[currentGalleryIndex];
 }
 
+// VALIDACIONES DE CAMPOS
+function validateName(input) {
+  const nameRegex = /^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$/;
+  const errorElement = document.getElementById('nameError');
+  
+  if (!nameRegex.test(input.value.trim())) {
+    errorElement.textContent = 'El nombre solo puede contener letras y espacios';
+    return false;
+  } else {
+    errorElement.textContent = '';
+    return true;
+  }
+}
+
+function validateEmail(input) {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const errorElement = document.getElementById('emailError');
+  
+  if (!emailRegex.test(input.value.trim())) {
+    errorElement.textContent = 'Por favor ingresa un correo electrónico válido';
+    return false;
+  } else {
+    errorElement.textContent = '';
+    return true;
+  }
+}
+
+function validatePhone(input) {
+  const phoneRegex = /^[0-9+\-\s()]+$/;
+  const errorElement = document.getElementById('phoneError');
+  
+  if (!phoneRegex.test(input.value.trim())) {
+    errorElement.textContent = 'El teléfono solo puede contener números y los caracteres + - ( )';
+    return false;
+  } else {
+    errorElement.textContent = '';
+    return true;
+  }
+}
+
 // Gestión de reservas
 function submitBooking(event) {
   event.preventDefault();
@@ -1029,19 +1054,19 @@ function submitBooking(event) {
     el.textContent = '';
   });
   
-  // Validar campos
-  if (!name.value.trim()) {
-    document.getElementById('nameError').textContent = 'El nombre es obligatorio';
+  // Validar campos con las nuevas validaciones
+  if (!name.value.trim() || !validateName(name)) {
+    document.getElementById('nameError').textContent = 'El nombre es obligatorio y solo puede contener letras';
     isValid = false;
   }
   
-  if (!email.value.trim() || !isValidEmail(email.value)) {
+  if (!email.value.trim() || !validateEmail(email)) {
     document.getElementById('emailError').textContent = 'Ingresa un correo electrónico válido';
     isValid = false;
   }
   
-  if (!phone.value.trim()) {
-    document.getElementById('phoneError').textContent = 'El teléfono es obligatorio';
+  if (!phone.value.trim() || !validatePhone(phone)) {
+    document.getElementById('phoneError').textContent = 'El teléfono es obligatorio y solo puede contener números y caracteres telefónicos';
     isValid = false;
   }
   
@@ -1083,7 +1108,7 @@ function submitBooking(event) {
     // Guardar en localStorage
     saveAppointments(appointments);
     
-    // Si el admin está logueado, actualizar la tabla
+    // Si el admin está logueados, actualizar la tabla
     if (isAdmin) {
       updateAppointmentsTable();
     }
@@ -1536,46 +1561,14 @@ function updateServiceOptions() {
   });
 }
 
-// Validaciones en tiempo real para formularios
-document.addEventListener('DOMContentLoaded', function() {
-    // Validación para campo de nombre (solo letras)
-    const nameField = document.getElementById('name');
-    if (nameField) {
-        nameField.addEventListener('input', function() {
-            this.value = this.value.replace(/[^a-zA-ZáéíóúÁÉÍÓÚñÑ ]/g, '');
-        });
-    }
-    
-    // Validación para campo de teléfono (solo números)
-    const phoneField = document.getElementById('phone');
-    if (phoneField) {
-        phoneField.addEventListener('input', function() {
-            this.value = this.value.replace(/[^0-9]/g, '');
-        });
-    }
-    
-    // Validación para campo de precio (solo números y punto decimal)
-    const priceField = document.getElementById('productPrice');
-    if (priceField) {
-        priceField.addEventListener('input', function() {
-            this.value = this.value.replace(/[^0-9.]/g, '');
-        });
-    }
-});
-
 // Inicialización
 document.addEventListener('DOMContentLoaded', function() {
   // Mostrar la sección de inicio por defecto
   showSection('home');
-
+  
   // Actualizar las opciones de servicios con los diseños de Halloween
   updateServiceOptions();
 });
 </script>
 </body>
 </html>
-
-
-
-
-
